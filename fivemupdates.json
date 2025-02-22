@@ -165,12 +165,6 @@
         "SkipOnFailure": false
     },
     {
-        "UpdateStageName": "Pause Update Stages",
-        "UpdateSourcePlatform": "Linux",
-        "UpdateSource": "Pause",
-        "UpdateSourceArgs": "2"
-    },
-    {
         "UpdateStageName": "Server Extract",
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
