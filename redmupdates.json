@@ -169,7 +169,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd ./redm/server && tar -xf fx.tar.xz >/dev/null 2>&1 && rm -f fx.tar.xz\"",
+        "UpdateSourceArgs": "-c \"cd ./redm/server && tar -xf fx.tar.xz >/dev/null && rm -f fx.tar.xz\"",
         "SkipOnFailure": false
     },
     {
