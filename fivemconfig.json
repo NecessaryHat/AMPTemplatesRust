@@ -12,11 +12,11 @@
         "EnumValues": {}
     },
     {
-        "DisplayName": "Cfx.re Licence Key",
+        "DisplayName": "Cfx.re Server Registration Key",
         "Category": "FiveM:stadia_controller",
         "Subcategory": "Server:dns:1",
-        "Description": "Sets the [Cfx.re licence key](https://keymaster.fivem.net/login?return_url=/) required to run the server. When creating the key, specify the public IP on which the key will first be used. Afterwards, the key can be used for a single server instance on any IP",
-        "Keywords": "licence,license,key,keymaster,sv_licenseKey",
+        "Description": "Sets the [Cfx.re server registration key](https://portal.cfx.re/servers/registration-keys) required to run the server",
+        "Keywords": "licence,license,registration,key,keymaster,sv_licenseKey",
         "FieldName": "sv_licenseKey",
         "InputType": "password",
         "ParamFieldName": "sv_licenseKey",
