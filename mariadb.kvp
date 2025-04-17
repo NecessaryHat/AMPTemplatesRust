@@ -35,7 +35,7 @@ App.ExecutableLinux=mariadb/bin/mariadb
 App.WorkingDir=mariadb
 App.LinuxCommandLineArgs=
 App.WindowsCommandLineArgs=
-App.CommandLineArgs={{$PlatformArgs}} {{CustomServerOptions}} -u {{user}} --port={{$ServerPort}} --socket=../run/mariadbd/mariadbd.sock {{db_password}}{{$FormattedArgs}}
+App.CommandLineArgs={{$PlatformArgs}} {{CustomServerOptions}} -u {{db_user}} --port={{$ServerPort}} --socket=../run/mariadbd/mariadbd.sock {{db_password}}{{$FormattedArgs}}
 App.UseLinuxIOREDIR=False
 App.AppSettings={}
 App.EnvironmentVariables={"PATH":"%PATH%:{{$FullBaseDir}}server/bin"}
@@ -43,7 +43,7 @@ App.CommandLineParameterFormat=-{0} {1}
 App.CommandLineParameterDelimiter= 
 App.ExitMethod=String
 App.ExitTimeout=15
-App.ExitString=shutdown; exit;
+App.ExitString=shutdown; exit
 App.ExitFile=app_exit.lck
 App.HasWriteableConsole=True
 App.HasReadableConsole=True
