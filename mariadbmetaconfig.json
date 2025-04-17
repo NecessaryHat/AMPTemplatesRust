@@ -1,6 +1,6 @@
 [
     {
-        "ConfigFile": "my.cnf",
+        "ConfigFile": ".my.cnf",
         "ConfigType": "kvp",
         "ConfigFormat": "{0}{1}",
         "Subsections": [

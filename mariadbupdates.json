@@ -1,23 +1,41 @@
 [
     {
-        "UpdateStageName": "Create Server Directory",
+        "UpdateStageName": "Create Installation Directory",
         "UpdateSourcePlatform": "All",
         "UpdateSource": "CreateDirectory",
-        "UpdateSourceArgs": "{{$FullBaseDir}}server"
+        "UpdateSourceArgs": "{{$FullBaseDir}}mariadb"
+    },
+    {
+        "UpdateStageName": "Create Data Directory",
+        "UpdateSourcePlatform": "All",
+        "UpdateSource": "CreateDirectory",
+        "UpdateSourceArgs": "{{$FullBaseDir}}data"
+    },
+    {
+        "UpdateStageName": "Create Log Directory",
+        "UpdateSourcePlatform": "All",
+        "UpdateSource": "CreateDirectory",
+        "UpdateSourceArgs": "{{$FullBaseDir}}log/mariadb"
+    },
+    {
+        "UpdateStageName": "Create Run Directory",
+        "UpdateSourcePlatform": "All",
+        "UpdateSource": "CreateDirectory",
+        "UpdateSourceArgs": "{{$FullBaseDir}}run/mariadbd"
     },
     {
         "UpdateStageName": "MariaDB Installation",
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mariadb && wget -qO mariadb.tar.gz https://dlm.mariadb.com/3899605/MariaDB/mariadb-11.5.2/bintar-linux-systemd-x86_64/mariadb-11.5.2-linux-systemd-x86_64.tar.gz && tar -xzf mariadb.tar.gz -C server --strip-components=1 >/dev/null 2>&1 && rm -rf mariadb.tar.gz >/dev/null 2>&1\"",
+        "UpdateSourceArgs": "-c \"cd mariadb && wget -qO mariadb.tar.gz https://dlm.mariadb.com/3899605/MariaDB/mariadb-11.4.5/bintar-linux-systemd-x86_64/mariadb-11.4.5-linux-systemd-x86_64.tar.gz && tar -xzf mariadb.tar.gz -C mariadb --strip-components=1 >/dev/null 2>&1 && rm -rf mariadb.tar.gz >/dev/null 2>&1\"",
         "SkipOnFailure": false
     },
     {
         "UpdateStageName": "MariaDB Download",
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "FetchURL",
-        "UpdateSourceData": "https://dlm.mariadb.com/3899616/MariaDB/mariadb-11.5.2/winx64-packages/mariadb-11.5.2-winx64.zip",
+        "UpdateSourceData": "https://dlm.mariadb.com/3899616/MariaDB/mariadb-11.4.5/winx64-packages/mariadb-11.4.5-winx64.zip",
         "UpdateSourceTarget": "{{$FullRootDir}}",
         "UnzipUpdateSource": true,
         "OverwriteExistingFiles": true,
@@ -29,21 +47,15 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb'; $directory = Get-ChildItem -Directory -Filter \\\"mariadb-*\\\"; Rename-Item $directory.FullName -NewName \\\"mariadb\\\"; Copy-Item -Path 'mariadb/*' -Destination 'server' -Recurse -Force -ErrorAction SilentlyContinue | Out-Null; Remove-Item -Path 'mariadb' -Recurse -Force -ErrorAction SilentlyContinue | Out-Null\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb'; Remove-Item -Path 'mariadb' -Recurse -Force -ErrorAction SilentlyContinue | Out-Null; $directory = Get-ChildItem -Directory -Filter \\\"mariadb-*\\\"; Rename-Item $directory.FullName -NewName \\\"mariadb\\\"\"",
         "SkipOnFailure": false
-    },
-    {
-        "UpdateStageName": "Create Data Directory",
-        "UpdateSourcePlatform": "All",
-        "UpdateSource": "CreateDirectory",
-        "UpdateSourceArgs": "{{$FullBaseDir}}data"
     },
     {
         "UpdateStageName": "Initialize MariaDB",
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mariadb/server && scripts/mariadb-install-db --port={{$ServerPort}} --basedir=. --datadir=../data --console\"",
+        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && scripts/mariadb-install-db --port={{$ServerPort}} --basedir=. --datadir=../data --console\"",
         "SkipOnFailure": false
     },
     {
@@ -51,7 +63,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/server'; & bin\\mysql_install_db.exe --port={{$ServerPort}} --datadir=../data\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; & bin\\mysql_install_db.exe --port={{$ServerPort}} --datadir=../data\"",
         "SkipOnFailure": false
     }
 ]
