@@ -54,11 +54,10 @@
         "UpdateStageName": "Installation Config Download",
         "UpdateSourcePlatform": "All",
         "UpdateSource": "FetchURL",
-        "UpdateSourceData": "https://dlm.mariadb.com/4047850/MariaDB/mariadb-11.4.5/winx64-packages/mariadb-11.4.5-winx64.zip",
-        "UpdateSourceTarget": "{{$FullRootDir}}",
-        "UnzipUpdateSource": true,
+        "UpdateSourceData": "https://github.com/Greelan/AMPTemplates/raw/dev/mariadbinstall.cnf",
+        "UpdateSourceArgs": ".install.cnf",
+        "UpdateSourceTarget": "{{$FullBaseDir}}",
         "OverwriteExistingFiles": true,
-        "DeleteAfterExtract": true,
         "SkipOnFailure": false
     },
     {
@@ -66,7 +65,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && scripts/mariadb-install-db --port={{$ServerPort}} --basedir=. --datadir=../data --console\"",
+        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && scripts/mariadb-install-db --defaults-file=../.install.cnf --port={{$ServerPort}}\"",
         "SkipOnFailure": false
     },
     {
@@ -74,7 +73,17 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; & bin\\mysql_install_db.exe --port={{$ServerPort}} --datadir=../data\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; & bin\\mysql_install_db.exe --defaults-file=../.install.cnf --port={{$ServerPort}}\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Server Config Download",
+        "UpdateSourcePlatform": "All",
+        "UpdateSource": "FetchURL",
+        "UpdateSourceData": "https://github.com/Greelan/AMPTemplates/raw/dev/mariadbmy.cnf",
+        "UpdateSourceArgs": ".my.cnf",
+        "UpdateSourceTarget": "{{$FullBaseDir}}",
+        "OverwriteExistingFiles": false,
         "SkipOnFailure": false
     }
 ]
