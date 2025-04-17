@@ -5,6 +5,7 @@
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
         "UpdateSourceArgs": "-c \"cd mariadb/mariadb && bin/mariadbd --port={{$ServerPort}} --basedir=. --datadir=../data --console --pid-file=../run/mariadbd/mariadbd.pid --socket=../run/mariadbd/mariadbd.sock &\"",
+        "RunInBackground": true,
         "SkipOnFailure": false
     },
     {
@@ -13,6 +14,13 @@
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
         "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; & bin\\mysql_install_db.exe --port={{$ServerPort}} --datadir=../data\"",
+        "RunInBackground": true,
         "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Pause Update Stages",
+        "UpdateSourcePlatform": "All",
+        "UpdateSource": "Pause",
+        "UpdateSourceArgs": "5"
     }
 ]
