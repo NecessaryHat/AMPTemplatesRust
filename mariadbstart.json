@@ -4,7 +4,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && { bin/mariadbd --port={{$ServerPort}} --basedir=. --datadir=../data --console --pid-file=../run/mariadbd/mariadbd.pid --socket=../run/mariadbd/mariadbd.sock & } && sleep 5\"",
+        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && bin/mariadbd --port={{$ServerPort}} --basedir=. --datadir=../data --console --pid-file=../run/mariadbd/mariadbd.pid --socket=../run/mariadbd/mariadbd.sock &\"",
         "SkipOnFailure": false
     },
     {
