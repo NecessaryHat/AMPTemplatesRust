@@ -1,5 +1,5 @@
-Meta.DisplayName=MariaDB
-Meta.Description=MariaDB Service Instance
+Meta.DisplayName=MariaDB 11.4 LTS
+Meta.Description=MariaDB 11.4 LTS Service Instance
 Meta.OS=Windows, Linux
 Meta.AarchSupport=Unknown
 Meta.Arch=x86_64
@@ -10,7 +10,7 @@ Meta.EndpointURIFormat=
 Meta.ConfigManifest=mariadbconfig.json
 Meta.MetaConfigManifest=mariadbmetaconfig.json
 Meta.ConfigRoot=mariadb.kvp
-Meta.MinAMPVersion=2.5.1.6
+Meta.MinAMPVersion=2.6.0.0
 Meta.SpecificDockerImage=
 Meta.DockerRequired=False
 Meta.DockerBaseReadOnly=False
@@ -35,11 +35,11 @@ App.ExecutableLinux=mariadb/bin/mariadb
 App.WorkingDir=mariadb
 App.LinuxCommandLineArgs=
 App.WindowsCommandLineArgs=
-App.CommandLineArgs={{$PlatformArgs}} {{CustomServerOptions}} -u amp --socket=../run/mariadbd/mariadbd.sock {{$FormattedArgs}}
+App.CommandLineArgs={{$PlatformArgs}} {{CustomServerOptions}} -u {{user}} --port={{$ServerPort}} --socket=../run/mariadbd/mariadbd.sock {{db_password}}{{$FormattedArgs}}
 App.UseLinuxIOREDIR=False
 App.AppSettings={}
 App.EnvironmentVariables={"PATH":"%PATH%:{{$FullBaseDir}}server/bin"}
-App.CommandLineParameterFormat=--{0}={1}
+App.CommandLineParameterFormat=-{0} {1}
 App.CommandLineParameterDelimiter= 
 App.ExitMethod=String
 App.ExitTimeout=15

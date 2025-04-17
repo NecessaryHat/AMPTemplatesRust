@@ -1,5 +1,32 @@
 [
     {
+        "DisplayName": "Database User",
+        "Category": "MariaDB:database",
+        "Subcategory": "Server:dns:1",
+        "Description": "Sets the user to connect to the server as. This user must exist on the server and, if applicable, have the appropriate permissions to access the specified database. The default is 'amp'",
+        "Keywords": "datatbase,user,username,login",
+        "FieldName": "db_user",
+        "InputType": "text",
+        "ParamFieldName": "db_user",
+        "DefaultValue": "amp",
+        "Placeholder": "amp",
+        "Required": true,
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Database Name",
+        "Category": "MariaDB:database",
+        "Subcategory": "Server:dns:1",
+        "Description": "Sets the database to connect to, if applicable. This database must exist on the server",
+        "Keywords": "datatbase,name",
+        "FieldName": "db_name",
+        "InputType": "text",
+        "ParamFieldName": "p",
+        "DefaultValue": "",
+        "SkipIfEmpty": true,
+        "EnumValues": {}
+    },
+    {
         "DisplayName": "Additional Command Line Options",
         "Category": "MariaDB:database",
         "Subcategory": "Server:dns:1",
