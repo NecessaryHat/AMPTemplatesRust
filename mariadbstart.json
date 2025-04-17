@@ -21,6 +21,6 @@
         "UpdateStageName": "Pause Update Stages",
         "UpdateSourcePlatform": "All",
         "UpdateSource": "Pause",
-        "UpdateSourceArgs": "5"
+        "UpdateSourceArgs": "10"
     }
 ]
