@@ -28,14 +28,14 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mariadb && wget -qO mariadb.tar.gz https://dlm.mariadb.com/3899605/MariaDB/mariadb-11.4.5/bintar-linux-systemd-x86_64/mariadb-11.4.5-linux-systemd-x86_64.tar.gz && tar -xzf mariadb.tar.gz -C mariadb --strip-components=1 >/dev/null 2>&1 && rm -rf mariadb.tar.gz >/dev/null 2>&1\"",
+        "UpdateSourceArgs": "-c \"cd mariadb && wget -qO mariadb.tar.gz https://dlm.mariadb.com/4047844/MariaDB/mariadb-11.4.5/bintar-linux-systemd-x86_64/mariadb-11.4.5-linux-systemd-x86_64.tar.gz && tar -xzf mariadb.tar.gz -C mariadb --strip-components=1 >/dev/null 2>&1 && rm -rf mariadb.tar.gz >/dev/null 2>&1\"",
         "SkipOnFailure": false
     },
     {
         "UpdateStageName": "MariaDB Download",
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "FetchURL",
-        "UpdateSourceData": "https://dlm.mariadb.com/3899616/MariaDB/mariadb-11.4.5/winx64-packages/mariadb-11.4.5-winx64.zip",
+        "UpdateSourceData": "https://dlm.mariadb.com/4047850/MariaDB/mariadb-11.4.5/winx64-packages/mariadb-11.4.5-winx64.zip",
         "UpdateSourceTarget": "{{$FullRootDir}}",
         "UnzipUpdateSource": true,
         "OverwriteExistingFiles": true,
