@@ -3,8 +3,8 @@
         "DisplayName": "Database User",
         "Category": "MariaDB:database",
         "Subcategory": "Server:dns:1",
-        "Description": "Sets the user to connect to the server as in AMP. This user must exist on the server and, if applicable, have the appropriate permissions to access the specified Database Name. Default = 'amp'",
-        "Keywords": "datatbase,user,username,login",
+        "Description": "Sets the user to connect to the server as in AMP. The user must exist on the server and, if applicable, have the appropriate permissions to access the specified Database Name. Default = 'amp'",
+        "Keywords": "database,user,username,login",
         "FieldName": "db_user",
         "InputType": "text",
         "ParamFieldName": "db_user",
@@ -14,31 +14,30 @@
         "EnumValues": {}
     },
     {
+        "DisplayName": "Database Password",
+        "Category": "MariaDB:database",
+        "Subcategory": "Server:dns:1",
+        "Description": "Sets the applicable password (if any) for the Database User when connecting in AMP to the server",
+        "Keywords": "database,password,login",
+        "FieldName": "db_password",
+        "InputType": "password",
+        "ParamFieldName": "p",
+        "DefaultValue": "",
+        "IncludeInCommandLine": true,
+        "SkipIfEmpty": true,
+        "EnumValues": {}
+    },
+    {
         "DisplayName": "Database Name",
         "Category": "MariaDB:database",
         "Subcategory": "Server:dns:1",
-        "Description": "Sets the database to connect to in AMP, if applicable. This database must exist on the server",
+        "Description": "Sets the database to connect to in AMP, if applicable. The database must exist on the server",
         "Keywords": "database,name",
         "FieldName": "db_name",
         "InputType": "text",
         "ParamFieldName": "db_name",
         "DefaultValue": "",
         "EnumValues": {}
-    },
-    {
-        "DisplayName": "Use Password",
-        "Category": "MariaDB:database",
-        "Subcategory": "Server:dns:1",
-        "Description": "If set, the specified Database User will be prompted for a password when connecting in AMP to the server",
-        "Keywords": "datatbase,password,login",
-        "FieldName": "db_password",
-        "InputType": "checkbox",
-        "ParamFieldName": "db_password",
-        "DefaultValue": "",
-        "EnumValues": {
-            "False": "",
-            "True": "-p "
-        }
     },
     {
         "DisplayName": "Additional Command Line Options",
