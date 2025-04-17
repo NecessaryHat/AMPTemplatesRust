@@ -13,7 +13,7 @@ socket = ../run/mariadbd/mariadbd.sock
 bind-address = 0.0.0.0
 port = 3306
 datadir = ../data
-language = /usr/local/share/mysql/english
+language = ./share/mysql/english
 log-basename = mariadb
 
 #
