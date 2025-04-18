@@ -191,6 +191,7 @@
         "ParamFieldName": "sv_enforceGameBuild",
         "DefaultValue": "1604",
         "EnumValues": {
+            "1": "1 (Base game without any DLCs)",
             "1604": "1604 (Arena War)",
             "2060": "2060 (Los Santos Summer Special)",
             "2189": "2189 (Cayo Perico Heist)",
@@ -199,7 +200,10 @@
             "2612": "2612 (mpg9ec)",
             "2699": "2699 (The Criminal Enterprises)",
             "2802": "2802 (Los Santos Drug Wars)",
-            "2944": "2944 (San Andreas Mercenaries)"
+            "2944": "2944 (San Andreas Mercenaries)",
+            "3095": "3095 (The Chop Shop)",
+            "3258": "3258 (Bottom Dollar Bounties)",
+            "3407": "3407 (Agents of Sabotage)"
         }
     },
     {
