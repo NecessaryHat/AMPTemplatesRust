@@ -13,7 +13,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; if (& bin/mariadb-admin.exe --port={{$ServerPort}} --user=amp ping > $null 2>&1) { exit 0 } else { & bin/mariadbd.exe --defaults-file=../.my.cnf --port={{$ServerPort}} --console}\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; if (& bin/mariadb-admin.exe --port={{$ServerPort}} --user=root ping > $null 2>&1) { exit 0 } else { & bin/mariadbd.exe --defaults-file=../.my.cnf --port={{$ServerPort}} --console}\"",
         "RunInBackground": true,
         "SkipOnFailure": false
     },
@@ -30,7 +30,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; while ($true) { & bin/mariadb-admin.exe --port={{$ServerPort}} --user=amp ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { break }; Start-Sleep -Seconds 1 }; & bin/mariadb.exe -u root --port={{$ServerPort}} -e \\\"CREATE USER IF NOT EXISTS 'amp'@'localhost' IDENTIFIED BY ''; GRANT ALL ON *.* TO 'amp'@'localhost' WITH GRANT OPTION; FLUSH PRIVILEGES;\\\"; & bin/mariadb-upgrade.exe --port={{$ServerPort}} --user=amp\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; while ($true) { & bin/mariadb-admin.exe --port={{$ServerPort}} --user=root ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { break }; Start-Sleep -Seconds 1 }; & bin/mariadb.exe -u root --port={{$ServerPort}} -e \\\"CREATE USER IF NOT EXISTS 'amp'@'localhost' IDENTIFIED BY ''; GRANT ALL ON *.* TO 'amp'@'localhost' WITH GRANT OPTION; FLUSH PRIVILEGES;\\\"; & bin/mariadb-upgrade.exe --port={{$ServerPort}} --user=amp\"",
         "SkipOnFailure": false
     }
 ]
