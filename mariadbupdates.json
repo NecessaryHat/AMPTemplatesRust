@@ -65,7 +65,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && scripts/mariadb-install-db --defaults-file=../.install.cnf --port={{$ServerPort}}\"",
+        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && [[ ! -f ../data/mysql/user.frm ]] && scripts/mariadb-install-db --defaults-file=../.install.cnf --port={{$ServerPort}}\"",
         "SkipOnFailure": false
     },
     {
