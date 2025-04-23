@@ -39,6 +39,8 @@
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
         "UpdateSourceArgs": "-NoProfile -Command \"Invoke-WebRequest -UseBasicParsing -Uri http://downloads.mariadb.org/rest-api/mariadb/11.4.5/mariadb-11.4.5-winx64.zip -OutFile 'mariadb.zip'\"",
+        "UpdateSourceConditionSetting": "DisableMariaDBDownload",
+        "UpdateSourceConditionValue": "false",
         "SkipOnFailure": false
     },
     {
@@ -49,6 +51,8 @@
         "UpdateSourceTarget": "{{$FullBaseDir}}",
         "OverwriteExistingFiles": true,
         "DeleteAfterExtract": true,
+        "UpdateSourceConditionSetting": "DisableMariaDBDownload",
+        "UpdateSourceConditionValue": "false",
         "SkipOnFailure": false
     },
     {
@@ -57,6 +61,8 @@
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
         "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb'; Remove-Item -Path 'mariadb' -Recurse -Force -ErrorAction SilentlyContinue | Out-Null; $directory = Get-ChildItem -Directory -Filter \\\"mariadb-*\\\"; Rename-Item $directory.FullName -NewName \\\"mariadb\\\"\"",
+        "UpdateSourceConditionSetting": "DisableMariaDBDownload",
+        "UpdateSourceConditionValue": "false",
         "SkipOnFailure": false
     },
     {
