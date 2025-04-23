@@ -38,7 +38,7 @@ App.WindowsCommandLineArgs=
 App.CommandLineArgs={{CustomServerOptions}} --port={{$ServerPort}} {{$PlatformArgs}} --reconnect --force {{$FormattedArgs}}
 App.UseLinuxIOREDIR=False
 App.AppSettings={}
-App.EnvironmentVariables={"PATH":"%PATH%:{{$FullBaseDir}}server/bin"}
+App.EnvironmentVariables={"PATH":"%PATH%:{{$FullBaseDir}}mariadb/bin"}
 App.CommandLineParameterFormat= --{0}={1}
 App.CommandLineParameterDelimiter= 
 App.ExitMethod=String
