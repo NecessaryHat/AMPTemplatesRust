@@ -13,7 +13,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; & bin\\mysql_install_db.exe --defaults-file=../.my.cnf --port={{$ServerPort}}\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; & bin\\mariadbd.exe --defaults-file=../.my.cnf --port={{$ServerPort}}\"",
         "RunInBackground": true,
         "SkipOnFailure": false
     },
@@ -28,7 +28,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && bin/mariadb-upgrade -u amp\"",
+        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && bin/mariadb-upgrade -port={{$ServerPort}} --socket=../run/mariadbd/mariadbd.sock --user=amp\"",
         "RunInBackground": true,
         "SkipOnFailure": false
     },
@@ -37,7 +37,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; & bin/mariadb-upgrade.exe -u amp\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; & bin/mariadb-upgrade.exe -port={{$ServerPort}} --socket=../run/mariadbd/mariadbd.sock --user=amp\"",
         "RunInBackground": true,
         "SkipOnFailure": false
     }
