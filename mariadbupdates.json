@@ -80,7 +80,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; if (Test-Path '../data/mysql/user.frm') { exit 0 } else { & bin/mysql-install-db.exe --defaults-file=../.install.cnf --port={{$ServerPort}} --user=amp }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; if (Test-Path '../data/mysql/user.frm') { exit 0 } else { & bin/mariadb-install-db.exe --defaults-file=../.install.cnf --port={{$ServerPort}} --user=amp }\"",
         "SkipOnFailure": false
     },
     {
