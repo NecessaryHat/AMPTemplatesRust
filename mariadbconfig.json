@@ -43,14 +43,29 @@
         "EnumValues": {}
     },
     {
+        "DisplayName": "Disable MariaDB Download",
+        "Category": "MariaDB:database",
+        "Subcategory": "Server:dns:1",
+        "Description": "If set, MariaDB will not be downloaded and installed when the server is updated. Saves on bandwidth if you don't need to change the MariaDB version already installed in the instance",
+        "Keywords": "mariadb,download,update",
+        "FieldName": "DisableMariaDBDownload",
+        "InputType": "checkbox",
+        "ParamFieldName": "DisableMariaDBDownload",
+        "DefaultValue": "false",
+        "EnumValues": {
+            "False": "false",
+            "True": "true"
+        }
+    },
+    {
         "DisplayName": "Additional Client Command Line Options",
         "Category": "MariaDB:database",
         "Subcategory": "Server:dns:1",
         "Description": "Specifies [additional command line options](https://mariadb.com/kb/en/mariadbd-options/) for the MariaDB client run by AMP that are not otherwise set by AMP. Use with care\"",
-        "Keywords": "custom,server,options,arguments",
-        "FieldName": "CustomServerOptions",
+        "Keywords": "custom,client,options,arguments",
+        "FieldName": "CustomClientOptions",
         "InputType": "Textarea",
-        "ParamFieldName": "CustomServerOptions",
+        "ParamFieldName": "CustomClientOptions",
         "DefaultValue": "",
         "EnumValues": {}
     }

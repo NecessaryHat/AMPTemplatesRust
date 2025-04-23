@@ -29,6 +29,8 @@
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
         "UpdateSourceArgs": "-c \"cd mariadb && wget -qO mariadb.tar.gz http://downloads.mariadb.org/rest-api/mariadb/11.4.5/mariadb-11.4.5-linux-systemd-x86_64.tar.gz && tar -xzf mariadb.tar.gz -C mariadb --strip-components=1 >/dev/null 2>&1 && rm -rf mariadb.tar.gz >/dev/null 2>&1\"",
+        "UpdateSourceConditionSetting": "DisableMariaDBDownload",
+        "UpdateSourceConditionValue": "false",
         "SkipOnFailure": false
     },
     {
@@ -80,7 +82,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; if (Test-Path '../data/mysql/user.frm') { exit 0 } else { & bin/mariadb-install-db.exe --defaults-file=../.install.cnf --port={{$ServerPort}} --user=amp }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; if (Test-Path '../data/mysql/user.frm') { exit 0 } else { & bin/mariadb-install-db.exe --config=../.install.cnf --port={{$ServerPort}} }\"",
         "SkipOnFailure": false
     },
     {
