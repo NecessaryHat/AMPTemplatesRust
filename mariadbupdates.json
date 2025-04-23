@@ -65,7 +65,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && [[ ! -f ../data/mysql/user.frm ]] && scripts/mariadb-install-db --defaults-file=../.install.cnf --port={{$ServerPort}}\"",
+        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && { [[ -f ../data/mysql/user.frm ]] || scripts/mariadb-install-db --defaults-file=../.install.cnf --port={{$ServerPort}} }\"",
         "SkipOnFailure": false
     },
     {
@@ -73,7 +73,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; if (-not (Test-Path '../data/mysql/user.frm')) { & bin\\mysql_install_db.exe --defaults-file=../.install.cnf --port={{$ServerPort}} --user=amp }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; if (Test-Path '../data/mysql/user.frm') { exit 0 } else { & scripts/mysql_install_db.exe --defaults-file=../.install.cnf --port={{$ServerPort}} --user=amp }\"",
         "SkipOnFailure": false
     },
     {
