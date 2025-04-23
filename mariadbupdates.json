@@ -28,16 +28,23 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mariadb && wget -qO mariadb.tar.gz hhttp://downloads.mariadb.org/rest-api/mariadb/11.4.5/mariadb-11.4.5-linux-systemd-x86_64.tar.gz && tar -xzf mariadb.tar.gz -C mariadb --strip-components=1 >/dev/null 2>&1 && rm -rf mariadb.tar.gz >/dev/null 2>&1\"",
+        "UpdateSourceArgs": "-c \"cd mariadb && wget -qO mariadb.tar.gz http://downloads.mariadb.org/rest-api/mariadb/11.4.5/mariadb-11.4.5-linux-systemd-x86_64.tar.gz && tar -xzf mariadb.tar.gz -C mariadb --strip-components=1 >/dev/null 2>&1 && rm -rf mariadb.tar.gz >/dev/null 2>&1\"",
         "SkipOnFailure": false
     },
     {
         "UpdateStageName": "MariaDB Download",
         "UpdateSourcePlatform": "Windows",
-        "UpdateSource": "FetchURL",
-        "UpdateSourceData": "http://downloads.mariadb.org/rest-api/mariadb/11.4.5/mariadb-11.4.5-winx64.zip",
-        "UpdateSourceTarget": "{{$FullRootDir}}",
-        "UnzipUpdateSource": true,
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "powershell.exe",
+        "UpdateSourceArgs": "-NoProfile -Command \"Invoke-WebRequest -UseBasicParsing -Uri http://downloads.mariadb.org/rest-api/mariadb/11.4.5/mariadb-11.4.5-winx64.zip -OutFile 'mariadb.zip'\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "MariaDB Extract",
+        "UpdateSourcePlatform": "Windows",
+        "UpdateSource": "ExtractArchive",
+        "UpdateSourceData": "mariadb.zip",
+        "UpdateSourceTarget": "{{$FullBaseDir}}",
         "OverwriteExistingFiles": true,
         "DeleteAfterExtract": true,
         "SkipOnFailure": false
