@@ -81,7 +81,7 @@ App.SteamUpdateAnonymousLogin=True
 App.SteamForceLoginPrompt=False
 App.RapidStartup=False
 App.SmartExcludeExemptions=["*.cfg","*.conf","*.config","*.ini","*.json","*.xml","*.properties","*.kvp","*.yml","*.yaml","*.toml","*.lua"]
-App.SmartExcludeSupported=True
+App.SmartExcludeSupported=False
 App.DumpFullChildProcessTree=False
 App.MonitorChildProcessName=
 App.MonitorDirectChildOnly=False
@@ -89,7 +89,7 @@ App.SupportsUniversalSleep=False
 App.WakeupMode=Any
 App.ApplicationReadyMode=Immediate
 App.TemplateMatchRegex={{(!?(?<Platform>Linux|Windows|All):)?(?<Value>\$?[\w]+)}}
-Console.FilterMatchRegex=\e\[(\d+;)*(\d+)?[ABCDHJKfmsu]|\e\[?[?\>\=\da-z]+
+Console.FilterMatchRegex=\e\[(\d+;)*(\d+)?[ABCDHJKfmsu]|\e\[?[?\>\=\da-z]+|WARNING: option --ssl-verify-server-cert is disabled, because of an insecure passwordless login\.
 Console.FilterMatchReplacement=
 Console.ThrowawayMessageRegex=
 Console.AppReadyRegex=^[\d-]+\s+[\d:]+\s+\d+\s+\[Note\] bin\/mariadbd: ready for connections\.$
