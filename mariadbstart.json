@@ -26,11 +26,11 @@
         "SkipOnFailure": false
     },
     {
-        "UpdateStageName": "Upgrade MariaDB",
+        "UpdateStageName": "Set Up and Upgrade MariaDB",
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; while ($true) { & bin/mariadb-admin.exe --port={{$ServerPort}} ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { break }; Start-Sleep -Seconds 1 }; & bin/mariadb-upgrade.exe --port={{$ServerPort}} --user=amp\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; while ($true) { & bin/mariadb-admin.exe --port={{$ServerPort}} ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { break }; Start-Sleep -Seconds 1 }; & bin/mariadb.exe -u root --port={{$ServerPort}} -e \\\"CREATE USER IF NOT EXISTS 'amp'@'localhost' IDENTIFIED BY ''; GRANT ALL ON *.* TO 'amp'@'localhost' WITH GRANT OPTION; FLUSH PRIVILEGES;\\\"; & bin/mariadb-upgrade.exe --port={{$ServerPort}} --user=amp\"",
         "SkipOnFailure": false
     }
 ]
