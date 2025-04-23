@@ -22,5 +22,23 @@
         "UpdateSourcePlatform": "All",
         "UpdateSource": "Pause",
         "UpdateSourceArgs": "10"
+    },
+    {
+        "UpdateStageName": "Upgrade MariaDB",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && bin/mariadb-upgrade -u amp\"",
+        "RunInBackground": true,
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Upgrade MariaDB",
+        "UpdateSourcePlatform": "Windows",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "powershell.exe",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; & bin/mariadb-upgrade.exe -u amp\"",
+        "RunInBackground": true,
+        "SkipOnFailure": false
     }
 ]
