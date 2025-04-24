@@ -38,7 +38,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Invoke-WebRequest -UseBasicParsing -Uri http://downloads.mariadb.org/rest-api/mariadb/11.4.5/mariadb-11.4.5-winx64.zip -OutFile 'mariadb.zip'\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"$ProgressPreference='SilentlyContinue'; Invoke-WebRequest -UseBasicParsing -Uri http://downloads.mariadb.org/rest-api/mariadb/11.4.5/mariadb-11.4.5-winx64.zip -OutFile 'mariadb.zip'\"",
         "UpdateSourceConditionSetting": "DisableMariaDBDownload",
         "UpdateSourceConditionValue": "false",
         "SkipOnFailure": false
