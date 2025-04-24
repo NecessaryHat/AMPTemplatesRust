@@ -32,11 +32,5 @@
         "UpdateSourceData": "powershell.exe",
         "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; for ($i=0; $i -lt 60; $i++) { & bin/mariadb-admin.exe --port={{$ServerPort}} --user=root ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { break }; Start-Sleep -Seconds 1 }; if ($i -eq 60) { exit 1 } else { & bin/mariadb.exe -u root --port={{$ServerPort}} -e \\\"CREATE USER IF NOT EXISTS 'amp'@'localhost' IDENTIFIED BY ''; GRANT ALL ON *.* TO 'amp'@'localhost' WITH GRANT OPTION; FLUSH PRIVILEGES\\\"; & bin/mariadb-upgrade.exe --port={{$ServerPort}} --user=amp }\"",
         "SkipOnFailure": false
-    },
-    {
-        "UpdateStageName": "Pause Update Stages",
-        "UpdateSourcePlatform": "All",
-        "UpdateSource": "Pause",
-        "UpdateSourceArgs": "60"
     }
 ]
