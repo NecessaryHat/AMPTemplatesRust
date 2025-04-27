@@ -66,21 +66,11 @@
         "SkipOnFailure": false
     },
     {
-        "UpdateStageName": "Installation Config Download",
-        "UpdateSourcePlatform": "All",
-        "UpdateSource": "FetchURL",
-        "UpdateSourceData": "https://github.com/Greelan/AMPTemplates/raw/mariadb/mariadbinstall.cnf",
-        "UpdateSourceArgs": ".install.cnf",
-        "UpdateSourceTarget": "{{$FullBaseDir}}",
-        "OverwriteExistingFiles": true,
-        "SkipOnFailure": false
-    },
-    {
         "UpdateStageName": "Initialize MariaDB",
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && { [[ -f ../data/mysql/user.frm ]] || scripts/mariadb-install-db --defaults-file=../.install.cnf --port={{$ServerPort}}; }\"",
+        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && { [[ -f ../data/mysql/user.frm ]] || scripts/mariadb-install-db --no-defaults --port={{$ServerPort}} --basedir=./ --datadir=../data; }\"",
         "SkipOnFailure": false
     },
     {
@@ -88,17 +78,15 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; if (Test-Path '../data/mysql/user.frm') { exit 0 } else { & bin/mariadb-install-db.exe --config=../.install.cnf --port={{$ServerPort}} }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; if (Test-Path '../data/mysql/user.frm') { exit 0 } else { & bin/mariadb-install-db.exe --port={{$ServerPort}} --datadir=../data }\"",
         "SkipOnFailure": false
     },
     {
-        "UpdateStageName": "Server Config Download",
+        "UpdateStageName": "Create my.cnf",
         "UpdateSourcePlatform": "All",
-        "UpdateSource": "FetchURL",
-        "UpdateSourceData": "https://github.com/Greelan/AMPTemplates/raw/mariadb/mariadbmy.cnf",
-        "UpdateSourceArgs": ".my.cnf",
-        "UpdateSourceTarget": "{{$FullBaseDir}}",
-        "OverwriteExistingFiles": false,
-        "SkipOnFailure": false
+        "UpdateSource": "CreateFile",
+        "UpdateSourceData": "",
+        "UpdateSourceArgs": "{{$FullBaseDir}}my.cnf",
+        "OverwriteExistingFiles": false
     }
 ]
