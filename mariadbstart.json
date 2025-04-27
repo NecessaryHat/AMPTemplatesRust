@@ -4,7 +4,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && bin/mariadb-admin --socket=../run/mariadbd/mariadbd.sock ping >/dev/null 2>&1 && exit 0 || bin/mariadbd --defaults-file=../my.cnf --port={{$ServerPort}} --basedir=./ --datadir=../data --pid-file=../run/mariadbd/mariadbd.pid --bind-address={{$ApplicationIPBinding}} &\"",
+        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && bin/mariadb-admin --socket=../run/mariadbd/mariadbd.sock ping >/dev/null 2>&1 && exit 0 || bin/mariadbd --defaults-file=../my.cnf --port={{$ServerPort}} --basedir=./ --datadir=../data --pid-file=../run/mariadbd/mariadbd.pid --socket=../run/mariadbd/mariadbd.sock --bind-address={{$ApplicationIPBinding}} &\"",
         "RunInBackground": true,
         "SkipOnFailure": false
     },
