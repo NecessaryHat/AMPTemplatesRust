@@ -13,11 +13,11 @@
         "EnumValues": {}
     },
     {
-        "DisplayName": "Database User",
+        "DisplayName": "Database User Name",
         "Category": "MariaDB:database",
         "Subcategory": "Server:dns:1",
         "Description": "Sets the user to connect to the server as in AMP. The user must exist on the server and, if applicable, have the appropriate permissions to access the specified Database Name. Default = 'amp'",
-        "Keywords": "database,user,username,login",
+        "Keywords": "database,user,name,username,login",
         "FieldName": "user",
         "InputType": "text",
         "ParamFieldName": "user",
@@ -28,11 +28,11 @@
         "EnumValues": {}
     },
     {
-        "DisplayName": "Database Password",
+        "DisplayName": "Database User Password",
         "Category": "MariaDB:database",
         "Subcategory": "Server:dns:1",
         "Description": "Sets the applicable password (if any) for the Database User when connecting in AMP to the server",
-        "Keywords": "database,password,login",
+        "Keywords": "database,user,password,login",
         "FieldName": "password",
         "InputType": "password",
         "ParamFieldName": "password",
