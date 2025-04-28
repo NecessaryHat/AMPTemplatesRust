@@ -1,7 +1,7 @@
 [
     {
         "UpdateStageName": "Create Installation Directory",
-        "UpdateSourcePlatform": "All",
+        "UpdateSourcePlatform": "Linux",
         "UpdateSource": "CreateDirectory",
         "UpdateSourceArgs": "{{$FullBaseDir}}mariadb"
     },
@@ -34,7 +34,9 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"ServerVersion=\\\"{{ServerVersion}}\\\"; CustomServerVersion=\\\"{{CustomServerVersion}}\\\"; if [[ -z \\\"$ServerVersion\\\" ]]; then if [[ ! \\\"$CustomServerVersion\\\" =~ ^(10|11|12)\\.[0-9]+\\.[0-9]+$ ]]; then echo \\\"Invalid MariaDB version format specified\\\" && exit 1; else DownloadURL=http://downloads.mariadb.org/rest-api/mariadb/$CustomServerVersion/mariadb-$CustomServerVersion-linux-systemd-x86_64.tar.gz && DownloadMessage=\\\"MariaDB v$CustomServerVersion downloaded\\\"; fi; else DownloadURL=$(wget -qO- \\\"https://downloads.mariadb.org/rest-api/mariadb/$ServerVersion/latest\\\" | jq -r \\\".releases[] | .files[] | select(.file_name | test(\\\\\\\"^mariadb-{{ServerVersion}}\\.[0-9]+-linux-systemd-x86_64\\.tar\\.gz$\\\\\\\")) | .file_download_url\\\") && DownloadMessage=\\\"Latest MariaDB v$ServerVersion downloaded\\\"; fi; wget -qO mariadb.tar.gz $DownloadURL && tar -xzf mariadb.tar.gz -C mariadb --strip-components=1 >/dev/null 2>&1 && rm -rf mariadb.tar.gz >/dev/null 2>&1 && echo \\\"$DownloadMessage\\\"\"",
+        "UpdateSourceArgs": "-c \"ServerVersion=\\\"{{ServerVersion}}\\\"; CustomServerVersion=\\\"{{CustomServerVersion}}\\\"; if [[ -z \\\"$ServerVersion\\\" ]]; then if [[ ! \\\"$CustomServerVersion\\\" =~ ^(10|11|12)\\.[0-9]+\\.[0-9]+$ ]]; then echo \\\"Invalid MariaDB version format specified\\\" && exit 1; else DownloadURL=http://downloads.mariadb.org/rest-api/mariadb/$CustomServerVersion/mariadb-$CustomServerVersion-linux-systemd-x86_64.tar.gz && DownloadMessage=\\\"MariaDB v$CustomServerVersion downloaded\\\"; fi; else DownloadURL=$(wget -qO- \\\"https://downloads.mariadb.org/rest-api/mariadb/$ServerVersion/latest\\\" | jq -r \\\".releases[] | .files[] | select(.file_name | test(\\\\\\\"^mariadb-{{ServerVersion}}\\.[0-9]+-linux-systemd-x86_64\\.tar\\.gz$\\\\\\\")) | .file_download_url\\\") && DownloadMessage=\\\"Latest MariaDB v$ServerVersion downloaded\\\"; fi; wget -qO mariadb.tar.gz $DownloadURL && rm -rf mariadb/* && tar -xzf mariadb.tar.gz -C mariadb --strip-components=1 >/dev/null 2>&1 && rm -rf mariadb.tar.gz >/dev/null 2>&1 && echo \\\"$DownloadMessage\\\"\"",
+        "UpdateSourceConditionSetting": "DisableMariaDBDownload",
+        "UpdateSourceConditionValue": "false",
         "SkipOnFailure": false
     },
     {
@@ -64,7 +66,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb'; $directory = Get-ChildItem -Directory -Filter 'mariadb-*' | Select-Object -First 1; if ($directory) { Copy-Item -Path (Join-Path $directory.FullName '*') -Destination 'mariadb' -Recurse -Force -ErrorAction SilentlyContinue | Out-Null; Remove-Item -Path $directory.FullName -Recurse -Force -ErrorAction SilentlyContinue | Out-Null }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb'; Remove-Item -Path 'mariadb' -Recurse -Force -ErrorAction SilentlyContinue | Out-Null; $directory = Get-ChildItem -Directory -Filter \\\"mariadb-*\\\"; Rename-Item $directory.FullName -NewName \\\"mariadb\\\"\"",
         "UpdateSourceConditionSetting": "DisableMariaDBDownload",
         "UpdateSourceConditionValue": "false",
         "SkipOnFailure": false
