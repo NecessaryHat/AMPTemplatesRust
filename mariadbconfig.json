@@ -64,10 +64,10 @@
         "FieldName": "ConnectionModeLinux",
         "InputType": "enum",
         "ParamFieldName": "ConnectionModeLinux",
-        "DefaultValue": "-host=127.0.0.1",
+        "DefaultValue": "--protocol=tcp --host=127.0.0.1",
         "EnumValues": {
-            "-host=127.0.0.1": "TCP/IP (default)",
-            "-socket=../run/mariadbd/mariadbd.sock": "Unix socket"           
+            "--protocol=tcp --host=127.0.0.1": "TCP/IP (default)",
+            "--protocol=socket --socket=../run/mariadbd/mariadbd.sock": "Unix socket"           
         }
     },
     {
@@ -79,10 +79,10 @@
         "FieldName": "ConnectionModeWindows",
         "InputType": "enum",
         "ParamFieldName": "ConnectionModeWindows",
-        "DefaultValue": "-host=127.0.0.1",
+        "DefaultValue": "--protocol=tcp --host=127.0.0.1",
         "EnumValues": {
-            "-host=127.0.0.1": "TCP/IP (default)",
-            "--pipe --socket={{WindowsSocketName}}": "Named pipe"           
+            "--protocol=tcp --host=127.0.0.1": "TCP/IP (default)",
+            "--protocol=pipe --socket={{WindowsSocketName}}": "Named pipe"           
         }
     },
     {
