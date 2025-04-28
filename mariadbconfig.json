@@ -1,5 +1,18 @@
 [
     {
+        "DisplayName": "Windows Socket Name",
+        "Category": "MariaDB:database",
+        "Subcategory": "Server:dns:1",
+        "Description": "",
+        "Keywords": "",
+        "FieldName": "WindowsSocketName",
+        "InputType": "text",
+        "Hidden": true,
+        "ParamFieldName": "WindowsSocketName",
+        "DefaultValue": "{{newguid()}}",
+        "EnumValues": {}
+    },
+    {
         "DisplayName": "Database User",
         "Category": "MariaDB:database",
         "Subcategory": "Server:dns:1",
