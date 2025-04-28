@@ -56,6 +56,36 @@
         "EnumValues": {}
     },
     {
+        "DisplayName": "Connection Mode (Linux)",
+        "Category": "MariaDB:database",
+        "Subcategory": "Server:dns:1",
+        "Description": "Sets how the MariaDB client run by AMP connects to the server. TCP/IP is required for any user with a '%' scope, but will only work if the server IP binding is 0.0.0.0 or 127.0.0.1",
+        "Keywords": "connection,mode",
+        "FieldName": "ConnectionModeLinux",
+        "InputType": "enum",
+        "ParamFieldName": "ConnectionModeLinux",
+        "DefaultValue": "-host=127.0.0.1",
+        "EnumValues": {
+            "-host=127.0.0.1": "TCP/IP (default)",
+            "-socket=../run/mariadbd/mariadbd.sock": "Unix socket"           
+        }
+    },
+    {
+        "DisplayName": "Connection Mode (Windows)",
+        "Category": "MariaDB:database",
+        "Subcategory": "Server:dns:1",
+        "Description": "Sets how the MariaDB client run by AMP connects to the server. TCP/IP is required for any user with a '%' scope, but will only work if the server IP binding is 0.0.0.0 or 127.0.0.1",
+        "Keywords": "connection,mode",
+        "FieldName": "ConnectionModeWindows",
+        "InputType": "enum",
+        "ParamFieldName": "ConnectionModeWindows",
+        "DefaultValue": "-host=127.0.0.1",
+        "EnumValues": {
+            "-host=127.0.0.1": "TCP/IP (default)",
+            "--pipe --socket={{WindowsSocketName}}": "Named pipe"           
+        }
+    },
+    {
         "DisplayName": "MariaDB Release Version",
         "Category": "MariaDB:database",
         "Subcategory": "Server:dns:1",
