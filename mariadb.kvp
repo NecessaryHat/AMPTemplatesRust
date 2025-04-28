@@ -1,5 +1,5 @@
-Meta.DisplayName=MariaDB 11.4 LTS
-Meta.Description=MariaDB 11.4 LTS Service Instance
+Meta.DisplayName=MariaDB
+Meta.Description=MariaDB Service Instance
 Meta.OS=Windows, Linux
 Meta.AarchSupport=Unknown
 Meta.Arch=x86_64
