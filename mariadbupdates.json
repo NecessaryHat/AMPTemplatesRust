@@ -12,6 +12,12 @@
         "UpdateSourceArgs": "{{$FullBaseDir}}data"
     },
     {
+        "UpdateStageName": "Create Plugin Directory",
+        "UpdateSourcePlatform": "All",
+        "UpdateSource": "CreateDirectory",
+        "UpdateSourceArgs": "{{$FullBaseDir}}plugin"
+    },
+    {
         "UpdateStageName": "Create Log Directory",
         "UpdateSourcePlatform": "All",
         "UpdateSource": "CreateDirectory",
