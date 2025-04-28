@@ -89,7 +89,7 @@ App.SupportsUniversalSleep=False
 App.WakeupMode=Any
 App.ApplicationReadyMode=Immediate
 App.TemplateMatchRegex={{(!?(?<Platform>Linux|Windows|All):)?(?<Value>\$?[\w]+)}}
-Console.FilterMatchRegex=\e\[(\d+;)*(\d+)?[ABCDHJKfmsu]|\e\[?[?\>\=\da-z]+|WARNING: option --ssl-verify-server-cert is disabled, because of an insecure passwordless login\.
+Console.FilterMatchRegex=\e\[(\d+;)*(\d+)?[ABCDHJKfmsu]|\e\[?[?\>\=\da-z]+|WARNING: option --ssl-verify-server-cert is disabled, because of an insecure passwordless login\.|This installation of MariaDB is already upgraded to .*\.|There is no need to run mysql_upgrade again for.*\.|You can use --force if you still want to run mysql_upgrade
 Console.FilterMatchReplacement=
 Console.ThrowawayMessageRegex=
 Console.AppReadyRegex=^[\d-]+\s+[\d:]+\s+\d+\s+\[Note\] bin\/mariadbd: ready for connections\.$
