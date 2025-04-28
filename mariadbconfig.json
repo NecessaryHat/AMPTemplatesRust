@@ -61,7 +61,7 @@
         "DisplayName": "Server Options File Settings",
         "Category": "MariaDB:database",
         "Subcategory": "Server:dns:1",
-        "Description": "Specifies [options file settings](https://mariadb.com/kb/en/configuring-mariadb-with-option-files/) to include in 'my.cnf' for the MariaDB server that are not otherwise set by AMP. One setting per line, including the option group heading",
+        "Description": "Specifies [options file settings](https://mariadb.com/kb/en/configuring-mariadb-with-option-files/) to include in 'my.cnf' for the MariaDB server that are not otherwise set by AMP. One setting per line, including the option group heading. Additional information on [server variables](https://mariadb.com/kb/en/server-system-variables/)",
         "Keywords": "options,file,settings",
         "FieldName": "OptionsFileSettings",
         "InputType": "Textarea",
