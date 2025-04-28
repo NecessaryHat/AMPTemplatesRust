@@ -1,7 +1,7 @@
 [
     {
         "UpdateStageName": "Create Installation Directory",
-        "UpdateSourcePlatform": "Linux",
+        "UpdateSourcePlatform": "All",
         "UpdateSource": "CreateDirectory",
         "UpdateSourceArgs": "{{$FullBaseDir}}mariadb"
     },
