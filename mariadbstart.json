@@ -4,7 +4,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && bin/mariadb-admin --socket=../run/mariadbd/mariadbd.sock ping >/dev/null 2>&1 && exit 0 || bin/mariadbd --defaults-file=../my.cnf --port={{$ServerPort}} --basedir=./ --datadir=../data --pid-file=../run/mariadbd/mariadbd.pid --socket=../run/mariadbd/mariadbd.sock --bind-address={{$ApplicationIPBinding}} --wait-timeout=28800 &\"",
+        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && bin/mariadb-admin --socket=../run/mariadbd/mariadbd.sock ping >/dev/null 2>&1 && exit 0 || bin/mariadbd --defaults-file=../my.cnf --port={{$ServerPort}} --basedir=./ --datadir=../data --pid-file=../run/mariadbd/mariadbd.pid --socket=../run/mariadbd/mariadbd.sock --bind-address={{$ApplicationIPBinding}} --general-log-file=../log/mariadb/mariadb.log --wait-timeout=28800 &\"",
         "RunInBackground": true,
         "SkipOnFailure": false
     },
@@ -13,7 +13,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; if (& bin/mariadb-admin.exe --port={{$ServerPort}} --user=root ping *> $null 2>&1) { exit 0 } else { & bin/mariadbd.exe --defaults-file=../my.cnf --port={{$ServerPort}} --basedir=./ --datadir=../data --bind-address={{$ApplicationIPBinding}} --wait-timeout=28800 --console }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; if (& bin/mariadb-admin.exe --port={{$ServerPort}} --user=root ping *> $null 2>&1) { exit 0 } else { & bin/mariadbd.exe --defaults-file=../my.cnf --port={{$ServerPort}} --basedir=./ --datadir=../data --bind-address={{$ApplicationIPBinding}} --general-log-file=../log/mariadb/mariadb.log --wait-timeout=28800 --console }\"",
         "RunInBackground": true,
         "SkipOnFailure": false
     },
