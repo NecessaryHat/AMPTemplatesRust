@@ -64,9 +64,9 @@
         "FieldName": "ConnectionModeLinux",
         "InputType": "enum",
         "ParamFieldName": "ConnectionModeLinux",
-        "DefaultValue": "--protocol=tcp --host=127.0.0.1",
+        "DefaultValue": "--protocol=tcp",
         "EnumValues": {
-            "--protocol=tcp --host=127.0.0.1": "TCP/IP (default)",
+            "--protocol=tcp": "TCP/IP (default)",
             "--protocol=socket --socket=../run/mariadbd/mariadbd.sock": "Unix socket"           
         }
     },
