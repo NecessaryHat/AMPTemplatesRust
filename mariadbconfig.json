@@ -53,20 +53,20 @@
         "ParamFieldName": "ServerVersion",
         "DefaultValue": "11.4",
         "EnumValues": {
-            "10.5": "10.5 LTS",
-            "10.6": "10.6 LTS",
-            "10.11": "10.11 LTS",
-            "11.4": "11.4 LTS (default)",
-            "11.8": "11.8 RC",
             "12.0": "12.0 Alpha",
-            "": "Custom"
+            "11.8": "11.8 RC",
+            "11.4": "11.4 LTS (default)",
+            "10.11": "10.11 LTS",
+            "10.6": "10.6 LTS",
+            "10.5": "10.5 LTS",
+            "": "--Custom--"
         }
     },
     {
         "DisplayName": "MariaDB Custom Point Release Version",
         "Category": "MariaDB:database",
         "Subcategory": "App:settings:1",
-        "Description": "Sets the [MariaDB point release version](https://dotnet.microsoft.com/en-us/download/dotnet) to install, if \"Custom\" is selected under MariaDB Release Version. WARNING: SWITCHING BETWEEN MAJOR RELEASE VERSIONS MAY CORRUPT DATA! Update the server after changing this setting",
+        "Description": "Sets the [MariaDB point release version](https://mariadb.org/mariadb/all-releases/) to install, if \"Custom\" is selected under MariaDB Release Version. WARNING: SWITCHING BETWEEN MAJOR RELEASE VERSIONS MAY CORRUPT DATA! Update the server after changing this setting",
         "Keywords": "mariadb,custom,point,release,version",
         "FieldName": "CustomServerVersion",
         "InputType": "text",
