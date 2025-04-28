@@ -34,7 +34,7 @@ App.ExecutableWin=mariadb\bin\mariadb.exe
 App.ExecutableLinux=mariadb/bin/mariadb
 App.WorkingDir=mariadb
 App.LinuxCommandLineArgs=--socket=../run/mariadbd/mariadbd.sock
-App.WindowsCommandLineArgs=
+App.WindowsCommandLineArgs=--pipe --socket={{WindowsSocketName}}
 App.CommandLineArgs={{CustomClientOptions}} --port={{$ServerPort}} {{$PlatformArgs}} --reconnect --force {{$FormattedArgs}}
 App.UseLinuxIOREDIR=False
 App.AppSettings={}

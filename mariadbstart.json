@@ -30,7 +30,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; for ($i=0; $i -lt 60; $i++) { & bin/mariadb-admin.exe --socket={{WindowsSocketName}} --user=root ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { break }; Start-Sleep -Seconds 1 }; if ($i -eq 60) { Write-Output \\\"MariaDB server failed to start. Aborting\\\"; exit 1 } else { & bin/mariadb.exe -u root --socket={{WindowsSocketName}} -e \\\"CREATE USER IF NOT EXISTS 'amp'@'localhost' IDENTIFIED BY ''; GRANT ALL ON *.* TO 'amp'@'localhost' WITH GRANT OPTION; FLUSH PRIVILEGES\\\"; & bin/mariadb-upgrade.exe --socket={{WindowsSocketName}} --user=amp }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; for ($i=0; $i -lt 60; $i++) { & bin/mariadb-admin.exe --pipe --socket={{WindowsSocketName}} --user=root ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { break }; Start-Sleep -Seconds 1 }; if ($i -eq 60) { Write-Output \\\"MariaDB server failed to start. Aborting\\\"; exit 1 } else { & bin/mariadb.exe -u root --socket={{WindowsSocketName}} -e \\\"CREATE USER IF NOT EXISTS 'amp'@'localhost' IDENTIFIED BY ''; GRANT ALL ON *.* TO 'amp'@'localhost' WITH GRANT OPTION; FLUSH PRIVILEGES\\\"; & bin/mariadb-upgrade.exe --pipe --socket={{WindowsSocketName}} --user=amp }\"",
         "SkipOnFailure": false
     }
 ]
