@@ -31,7 +31,7 @@
         "DisplayName": "Database User Password",
         "Category": "MariaDB:database",
         "Subcategory": "Server:dns:1",
-        "Description": "Sets the applicable password (if any) for the Database User when connecting in AMP to the server",
+        "Description": "Sets the applicable password (if any) for the Database User when connecting in AMP to the server. The default 'amp' user has no password",
         "Keywords": "database,user,password,login",
         "FieldName": "password",
         "InputType": "password",
@@ -59,31 +59,43 @@
         "DisplayName": "Connection Mode (Linux)",
         "Category": "MariaDB:database",
         "Subcategory": "Server:dns:1",
-        "Description": "Sets how the MariaDB client run by AMP connects to the server. TCP/IP is required for any user with a '%' scope, but will only work if the server IP binding is 0.0.0.0 or 127.0.0.1",
+        "Description": "Sets how the MariaDB client run by AMP connects to the server. TCP/IP will only work if the server IP binding is 0.0.0.0 or 127.0.0.1",
         "Keywords": "connection,mode",
         "FieldName": "ConnectionModeLinux",
         "InputType": "enum",
         "ParamFieldName": "ConnectionModeLinux",
-        "DefaultValue": "--protocol=tcp",
+        "DefaultValue": "--protocol=socket --socket=../run/mariadbd/mariadbd.sock",
         "EnumValues": {
-            "--protocol=tcp": "TCP/IP (default)",
-            "--protocol=socket --socket=../run/mariadbd/mariadbd.sock": "Unix socket"           
+            "--protocol=tcp --host=127.0.0.1": "TCP/IP",
+            "--protocol=socket --socket=../run/mariadbd/mariadbd.sock": "Unix socket (default)"
         }
     },
     {
         "DisplayName": "Connection Mode (Windows)",
         "Category": "MariaDB:database",
         "Subcategory": "Server:dns:1",
-        "Description": "Sets how the MariaDB client run by AMP connects to the server. TCP/IP is required for any user with a '%' scope, but will only work if the server IP binding is 0.0.0.0 or 127.0.0.1",
+        "Description": "Sets how the MariaDB client run by AMP connects to the server. TCP/IP will only work if the server IP binding is 0.0.0.0 or 127.0.0.1",
         "Keywords": "connection,mode",
         "FieldName": "ConnectionModeWindows",
         "InputType": "enum",
         "ParamFieldName": "ConnectionModeWindows",
-        "DefaultValue": "--protocol=tcp --host=127.0.0.1",
+        "DefaultValue": "--protocol=pipe --socket={{WindowsSocketName}}",
         "EnumValues": {
-            "--protocol=tcp --host=127.0.0.1": "TCP/IP (default)",
-            "--protocol=pipe --socket={{WindowsSocketName}}": "Named pipe"           
+            "--protocol=tcp --host=127.0.0.1": "TCP/IP",
+            "--protocol=pipe --socket={{WindowsSocketName}}": "Named pipe (default)"           
         }
+    },
+    {
+        "DisplayName": "Root User Password (Windows)",
+        "Category": "MariaDB:database",
+        "Subcategory": "Server:dns:1",
+        "Description": "Specifies the applicable password (if any) for the root user. By default, the root user has no password, but one can be configured if required. Note that this setting does not itself configure the password, but it must be included here if one is set",
+        "Keywords": "root,user,password,login",
+        "FieldName": "RootPassword",
+        "InputType": "password",
+        "ParamFieldName": "RootPassword",
+        "DefaultValue": "",
+        "EnumValues": {}
     },
     {
         "DisplayName": "MariaDB Release Version",
