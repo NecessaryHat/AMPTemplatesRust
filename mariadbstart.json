@@ -13,7 +13,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; if (& bin/mariadb-admin.exe --socket={{WindowsSocketName}} --user=root --password='{{RootPassword}}' ping *> $null 2>&1) { exit 0 } else { & bin/mariadbd.exe --defaults-file=../my.cnf --port={{$ServerPort}} --basedir=./ --datadir=../data --plugin-dir=../plugin --socket={{WindowsSocketName}} --bind-address={{$ApplicationIPBinding}} --general-log-file=../log/mariadb/mariadb.log --wait-timeout=28800 --named-pipe --console }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; $PasswordOption=''; $RootPassword='{{RootPassword}}'; if ( -not [string]::IsNullOrWhiteSpace($RootPassword) ) { $PasswordOption=\\\"--password=${RootPassword} \\\" }; if (& bin/mariadb-admin.exe --socket={{WindowsSocketName}} --user=root ${PasswordOption}ping *> $null 2>&1) { exit 0 } else { & bin/mariadbd.exe --defaults-file=../my.cnf --port={{$ServerPort}} --basedir=./ --datadir=../data --plugin-dir=../plugin --socket={{WindowsSocketName}} --bind-address={{$ApplicationIPBinding}} --general-log-file=../log/mariadb/mariadb.log --wait-timeout=28800 --named-pipe --console }\"",
         "RunInBackground": true,
         "SkipOnFailure": false
     },
@@ -30,7 +30,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; for ($i=0; $i -lt 60; $i++) { & bin/mariadb-admin.exe --pipe --socket={{WindowsSocketName}} --user=root --password='{{RootPassword}}' ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { break }; Start-Sleep -Seconds 1 }; if ($i -eq 60) { Write-Output \\\"MariaDB server failed to start. Aborting\\\"; exit 1 } else { & bin/mariadb.exe --pipe --socket={{WindowsSocketName}} --user=root --password='{{RootPassword}}' -e \\\"CREATE USER IF NOT EXISTS 'amp'@'localhost' IDENTIFIED BY ''; GRANT ALL ON *.* TO 'amp'@'localhost' WITH GRANT OPTION; FLUSH PRIVILEGES\\\"; & bin/mariadb-upgrade.exe --pipe --socket={{WindowsSocketName}} --user=amp }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; $PasswordOption=''; $RootPassword='{{RootPassword}}'; if ( -not [string]::IsNullOrWhiteSpace($RootPassword) ) { $PasswordOption=\\\"--password=${RootPassword} \\\" }; for ($i=0; $i -lt 60; $i++) { & bin/mariadb-admin.exe --pipe --socket={{WindowsSocketName}} --user=root ${PasswordOption}ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { break }; Start-Sleep -Seconds 1 }; if ($i -eq 60) { Write-Output \\\"MariaDB server failed to start. Aborting\\\"; exit 1 } else { & bin/mariadb.exe --pipe --socket={{WindowsSocketName}} --user=root ${PasswordOption}-e \\\"CREATE USER IF NOT EXISTS 'amp'@'localhost' IDENTIFIED BY ''; GRANT ALL ON *.* TO 'amp'@'localhost' WITH GRANT OPTION; FLUSH PRIVILEGES\\\"; & bin/mariadb-upgrade.exe --pipe --socket={{WindowsSocketName}} --user=amp }\"",
         "SkipOnFailure": false
     }
 ]
