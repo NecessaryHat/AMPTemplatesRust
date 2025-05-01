@@ -60,7 +60,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb'; $target = Join-Path (Get-Location) 'mariadb'; Get-ChildItem -Path $target -Recurse -Force | Where-Object { -not ($_.FullName -like '*\\lib\\plugin*') } | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue; $source = Get-ChildItem -Directory -Filter 'mariadb-*' | Select-Object -First 1; if ($source) { robocopy $source.FullName $target /E /MOVE /NFL /NDL /NJH /NJS /NP > $null }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb'; $target = Join-Path (Get-Location) 'mariadb'; Get-ChildItem -Path $target -Recurse -Force | Where-Object { -not ($_.FullName -like '*\\lib\\plugin*') } | Remove-Item -Recurse -Force; $source = Get-ChildItem -Directory -Filter 'mariadb-*' | Select-Object -First 1; if ($source) { robocopy $source.FullName $target /E /MOVE /NFL /NDL /NJH /NJS /NP }\"",
         "UpdateSourceConditionSetting": "DisableMariaDBDownload",
         "UpdateSourceConditionValue": "false",
         "SkipOnFailure": false
