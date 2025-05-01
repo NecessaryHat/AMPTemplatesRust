@@ -26,11 +26,11 @@
         "SkipOnFailure": false
     },
     {
-        "UpdateStageName": "Upgrade MariaDB",
+        "UpdateStageName": "Set Up and Upgrade MariaDB",
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; for ($i=0; $i -lt 60; $i++) { & bin/mariadb-admin.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root --password={{RootPassword}} ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { break }; Start-Sleep -Seconds 1 }; if ($i -eq 60) { Write-Output \\\"MariaDB server failed to start. Aborting\\\"; exit 1 } else { & bin/mariadb-upgrade.exe --port={{$ServerPort}} --protocol=tcp --host=127.0.0.1 --user=root --password={{RootPassword}} }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; for ($i=0; $i -lt 60; $i++) { & bin/mariadb-admin.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root --password={{RootPassword}} ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { & bin/mariadb-admin.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { $hosts = & bin/mariadb.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root --password={{RootPassword}} --batch --skip-column-names -e \\\"SELECT Host FROM mysql.user WHERE User = 'root';\\\"; foreach ($host in $hosts) { & bin/mariadb.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root -e \\\"ALTER USER 'root'@'${host}' IDENTIFIED BY '{{RootPassword}}';\\\" }; & bin/mariadb.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root --password={{RootPassword}} -e \\\"FLUSH PRIVILEGES; SELECT User, Host, plugin, authentication_string FROM mysql.user WHERE User = 'root';\\\"; break } }; Start-Sleep -Seconds 1 }; if ($i -eq 60) { Write-Output \\\"MariaDB server failed to start. Aborting\\\"; exit 1 } else { & bin/mariadb-upgrade.exe --port={{$ServerPort}} --protocol=tcp --host=127.0.0.1 --user=root --password={{RootPassword}} }\"",
         "SkipOnFailure": false
     }
 ]
