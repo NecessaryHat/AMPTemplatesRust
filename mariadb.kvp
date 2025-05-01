@@ -33,7 +33,7 @@ App.SteamWorkshopDownloadLocation=
 App.ExecutableWin=mariadb\bin\mariadb.exe
 App.ExecutableLinux=mariadb/bin/mariadb
 App.WorkingDir=mariadb
-App.LinuxCommandLineArgs=--protocol=socket --socket=../run/mariadbd/mariadbd.sock
+App.LinuxCommandLineArgs=--protocol=socket --socket=../run/mariadbd/mariadbd.sock --user=amp
 App.WindowsCommandLineArgs=--protocol=pipe --socket={{WindowsSocketName}} --user=root --password={{RootPassword}}
 App.CommandLineArgs={{CustomClientOptions}} {{$PlatformArgs}} --reconnect --force {{$FormattedArgs}}
 App.UseLinuxIOREDIR=False
