@@ -1,7 +1,7 @@
 [
     {
         "UpdateStageName": "Create Installation Directory",
-        "UpdateSourcePlatform": "Linux",
+        "UpdateSourcePlatform": "All",
         "UpdateSource": "CreateDirectory",
         "UpdateSourceArgs": "{{$FullBaseDir}}mariadb"
     },
@@ -12,12 +12,6 @@
         "UpdateSourceArgs": "{{$FullBaseDir}}data"
     },
     {
-        "UpdateStageName": "Create Plugin Directory",
-        "UpdateSourcePlatform": "All",
-        "UpdateSource": "CreateDirectory",
-        "UpdateSourceArgs": "{{$FullBaseDir}}plugin"
-    },
-    {
         "UpdateStageName": "Create Log Directory",
         "UpdateSourcePlatform": "All",
         "UpdateSource": "CreateDirectory",
@@ -25,12 +19,12 @@
     },
     {
         "UpdateStageName": "Create Run Directory",
-        "UpdateSourcePlatform": "All",
+        "UpdateSourcePlatform": "Linux",
         "UpdateSource": "CreateDirectory",
         "UpdateSourceArgs": "{{$FullBaseDir}}run/mariadbd"
     },
     {
-        "UpdateStageName": "MariaDB Installation",
+        "UpdateStageName": "MariaDB Download",
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
@@ -40,33 +34,11 @@
         "SkipOnFailure": false
     },
     {
-        "UpdateStageName": "MariaDB Download",
-        "UpdateSourcePlatform": "Windows",
-        "UpdateSource": "Executable",
-        "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"$ProgressPreference='SilentlyContinue'; $ServerVersion='{{ServerVersion}}'; $CustomServerVersion='{{CustomServerVersion}}'; if ( [string]::IsNullOrWhiteSpace($ServerVersion) ) { if ( $CustomServerVersion -notmatch '^(10|11|12)\\.[0-9]+\\.[0-9]+$' ) { Write-Output 'Invalid MariaDB version format specified'; exit 1 } else { $DownloadURL=\\\"http://downloads.mariadb.org/rest-api/mariadb/$CustomServerVersion/mariadb-$CustomServerVersion-winx64.zip\\\"; $OutputMessage=\\\"MariaDB v$CustomServerVersion downloaded\\\" } } else { $DownloadURL=(Invoke-RestMethod -Uri (\\\"https://downloads.mariadb.org/rest-api/mariadb/$ServerVersion/latest\\\") -UseBasicParsing).releases.PSObject.Properties.Value.files | Where-Object { $_.file_name -match '^mariadb-{{ServerVersion}}.*-winx64\\.zip$' } | Select-Object -First 1 -ExpandProperty file_download_url; $OutputMessage=\\\"Latest MariaDB v$ServerVersion downloaded\\\" }; Invoke-WebRequest -UseBasicParsing -Uri $DownloadURL -OutFile mariadb.zip; Write-Output $OutputMessage\"",
-        "UpdateSourceConditionSetting": "DisableMariaDBDownload",
-        "UpdateSourceConditionValue": "false",
-        "SkipOnFailure": false
-    },
-    {
-        "UpdateStageName": "MariaDB Extract",
-        "UpdateSourcePlatform": "Windows",
-        "UpdateSource": "ExtractArchive",
-        "UpdateSourceData": "mariadb.zip",
-        "UpdateSourceTarget": "{{$FullBaseDir}}",
-        "OverwriteExistingFiles": true,
-        "DeleteAfterExtract": true,
-        "UpdateSourceConditionSetting": "DisableMariaDBDownload",
-        "UpdateSourceConditionValue": "false",
-        "SkipOnFailure": false
-    },
-    {
         "UpdateStageName": "MariaDB Installation",
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb'; Remove-Item -Path 'mariadb' -Recurse -Force -ErrorAction SilentlyContinue | Out-Null; $directory = Get-ChildItem -Directory -Filter \\\"mariadb-*\\\"; Rename-Item $directory.FullName -NewName \\\"mariadb\\\"\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb'; $ProgressPreference='SilentlyContinue'; $ServerVersion='{{ServerVersion}}'; $CustomServerVersion='{{CustomServerVersion}}'; if ( [string]::IsNullOrWhiteSpace($ServerVersion) ) { if ( $CustomServerVersion -notmatch '^(10|11|12)\\.[0-9]+\\.[0-9]+$' ) { Write-Output 'Invalid MariaDB version format specified'; exit 1 } else { $DownloadURL=\\\"http://downloads.mariadb.org/rest-api/mariadb/$CustomServerVersion/mariadb-$CustomServerVersion-winx64.msi\\\"; $OutputMessage=\\\"MariaDB v$CustomServerVersion downloaded\\\" } } else { $DownloadURL=(Invoke-RestMethod -Uri (\\\"https://downloads.mariadb.org/rest-api/mariadb/$ServerVersion/latest\\\") -UseBasicParsing).releases.PSObject.Properties.Value.files | Where-Object { $_.file_name -match '^mariadb-{{ServerVersion}}.*-winx64\\.msi$' } | Select-Object -First 1 -ExpandProperty file_download_url; $OutputMessage=\\\"Latest MariaDB v$ServerVersion downloaded\\\" }; Invoke-WebRequest -UseBasicParsing -Uri $DownloadURL -OutFile mariadb.msi; & msiexec.exe /i mariadb.msi /qn /norestart ADDLOCAL=\\\"Database,Client\\\" PORT=\\\"{{$ServerPort}}\\\" PASSWORD=\\\"{{RootPassword}}\\\" INSTALLDIR=\\\"{{$FullBaseDir}}mariadb\\\" DATADIR=\\\"{{$FullBaseDir}}data\\\"; if ($?) { Remove-Item -Path 'mariadb.msi' -Recurse -Force -ErrorAction SilentlyContinue | Out-Null; Write-Output $OutputMessage }\"",
         "UpdateSourceConditionSetting": "DisableMariaDBDownload",
         "UpdateSourceConditionValue": "false",
         "SkipOnFailure": false
@@ -77,14 +49,6 @@
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
         "UpdateSourceArgs": "-c \"cd mariadb/mariadb && { [[ -f ../data/mysql/user.frm ]] || scripts/mariadb-install-db --no-defaults --port={{$ServerPort}} --basedir=./ --datadir=../data; }\"",
-        "SkipOnFailure": false
-    },
-    {
-        "UpdateStageName": "Initialize MariaDB",
-        "UpdateSourcePlatform": "Windows",
-        "UpdateSource": "Executable",
-        "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; if (Test-Path '../data/mysql/user.frm') { exit 0 } else { & bin/mariadb-install-db.exe --port={{$ServerPort}} --datadir=../data }\"",
         "SkipOnFailure": false
     },
     {

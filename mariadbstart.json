@@ -13,7 +13,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; & bin/mariadb-admin.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root --password={{RootPassword}} ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { exit 0 } else { & bin/mariadbd.exe --defaults-file=../my.cnf --port={{$ServerPort}} --basedir=./ --datadir=../data --socket={{WindowsSocketName}} --bind-address=0.0.0.0 --general-log-file=../log/mariadb/mariadb.log --wait-timeout=28800 --named-pipe --plugin-load-add=auth_named_pipe --console }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; & bin/mariadb-admin.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root --password={{RootPassword}} ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { exit 0 } else { & bin/mariadbd.exe --defaults-file=../my.cnf --port={{$ServerPort}} --basedir=./ --datadir=../data --socket={{WindowsSocketName}} --bind-address=0.0.0.0 --general-log-file=../log/mariadb/mariadb.log --wait-timeout=28800 --named-pipe --console }\"",
         "RunInBackground": true,
         "SkipOnFailure": false
     },
@@ -26,11 +26,11 @@
         "SkipOnFailure": false
     },
     {
-        "UpdateStageName": "Set Up and Upgrade MariaDB",
+        "UpdateStageName": "Upgrade MariaDB",
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; for ($i=0; $i -lt 60; $i++) { & bin/mariadb-admin.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root --password={{RootPassword}} ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { & bin/mariadb-admin.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { $hosts = & bin/mariadb.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root --password={{RootPassword}} --batch --skip-column-names -e \\\"SELECT Host FROM mysql.user WHERE User = 'root';\\\"; foreach ($host in $hosts) { & bin/mariadb.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root -e \\\"ALTER USER 'root'@'${host}' IDENTIFIED BY '{{RootPassword}}';\\\" }; & bin/mariadb.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root --password={{RootPassword}} -e \\\"FLUSH PRIVILEGES; SELECT User, Host, plugin, authentication_string FROM mysql.user WHERE User = 'root';\\\"; break } }; Start-Sleep -Seconds 1 }; if ($i -eq 60) { Write-Output \\\"MariaDB server failed to start. Aborting\\\"; exit 1 } else { & bin/mariadb-upgrade.exe --port={{$ServerPort}} --protocol=tcp --host=127.0.0.1 --user=root --password={{RootPassword}} }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; for ($i=0; $i -lt 60; $i++) { & bin/mariadb-admin.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root --password={{RootPassword}} ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { break }; Start-Sleep -Seconds 1 }; if ($i -eq 60) { Write-Output \\\"MariaDB server failed to start. Aborting\\\"; exit 1 } else { & bin/mariadb-upgrade.exe --port={{$ServerPort}} --protocol=tcp --host=127.0.0.1 --user=root --password={{RootPassword}} }\"",
         "SkipOnFailure": false
     }
 ]
