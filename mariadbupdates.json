@@ -60,7 +60,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb'; Move-Item 'mariadb/lib/plugin' 'plugin.bak' -Force *> $null; Get-ChildItem 'mariadb' | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue *> $null; New-Item 'mariadb/lib' -ItemType Directory -Force | Out-Null; Move-Item 'plugin.bak' 'mariadb/lib/plugin' -Force *> $null; $source = Get-ChildItem -Directory -Filter 'mariadb-*' | Select-Object -First 1; if ($source) { robocopy $source.FullName $target /E /MOVE /NFL /NDL /NJH /NJS /NP; if ($LASTEXITCODE -gt 7) { exit $LASTEXITCODE } }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb'; Move-Item 'mariadb/lib/plugin' 'plugin.bak' -Force *> $null; Get-ChildItem 'mariadb' | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue *> $null; New-Item 'mariadb/lib' -ItemType Directory -Force | Out-Null; Move-Item 'plugin.bak' 'mariadb/lib/plugin' -Force *> $null; $source = Get-ChildItem -Directory -Filter 'mariadb-*' | Select-Object -First 1; if ($source) { robocopy $source.FullName 'mariadb' /E /MOVE /NFL /NDL /NJH /NJS /NP; if ($LASTEXITCODE -gt 7) { exit $LASTEXITCODE } }\"",
         "UpdateSourceConditionSetting": "DisableMariaDBDownload",
         "UpdateSourceConditionValue": "false",
         "SkipOnFailure": false
