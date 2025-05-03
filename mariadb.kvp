@@ -34,11 +34,11 @@ App.ExecutableWin=mariadb\bin\mariadb.exe
 App.ExecutableLinux=mariadb/bin/mariadb
 App.WorkingDir=mariadb
 App.LinuxCommandLineArgs=--protocol=socket --socket=../run/mariadbd/mariadbd.sock --user=amp
-App.WindowsCommandLineArgs=--protocol=pipe --socket={{WindowsSocketName}} --user=root --password={{RootPassword}}
+App.WindowsCommandLineArgs=--protocol=pipe --socket={{WindowsSocketName}} --user=root
 App.CommandLineArgs={{CustomClientOptions}} {{$PlatformArgs}} --reconnect --force {{$FormattedArgs}}
 App.UseLinuxIOREDIR=False
 App.AppSettings={}
-App.EnvironmentVariables={"PATH":"%PATH%:{{$FullBaseDir}}mariadb/bin"}
+App.EnvironmentVariables={"PATH":"%PATH%:{{$FullBaseDir}}mariadb/bin","MYSQL_PWD":"{{RootPassword}}"}
 App.CommandLineParameterFormat=--{0}={1}
 App.CommandLineParameterDelimiter= 
 App.ExitMethod=String
