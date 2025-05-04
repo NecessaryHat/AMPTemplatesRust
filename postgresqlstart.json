@@ -4,7 +4,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd postgresql/pgsql && export PGPASSWORD={{AMPPassword}} && bin/pg_isready --host=\\\"{{$FullBaseDir}}run\\\" --port={{$ServerPort}} --username=amp --dbname=postgres >/dev/null 2>&1 && exit 0 || bin/postgres -D \\\"{{$FullBaseDir}}data\\\" -k \\\"{{$FullBaseDir}}run\\\" --external_pid_file=\\\"{{$FullBaseDir}}run/postgres.pid\\\" &\"",
+        "UpdateSourceArgs": "-c \"cd postgresql/pgsql && export PGPASSWORD={{AMPPassword}} && bin/pg_isready --host=\\\"{{$FullBaseDir}}run\\\" --port={{$ServerPort}} --username=amp --dbname=postgres >/dev/null 2>&1 && exit 0 || bin/postgres -D \\\"{{$FullBaseDir}}data\\\" -k \\\"{{$FullBaseDir}}run\\\" --external_pid_file=\\\"{{$FullBaseDir}}run/postgres.pid\\\" --listen_addresses=\\\"{{$ApplicationIPBinding}}\\\" &\"",
         "RunInBackground": true,
         "SkipOnFailure": false
     },
