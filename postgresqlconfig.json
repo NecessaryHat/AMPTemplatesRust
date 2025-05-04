@@ -1,0 +1,99 @@
+[
+    {
+        "DisplayName": "AMP User Password",
+        "Category": "PostgreSQL:database",
+        "Subcategory": "Server:dns:1",
+        "Description": "",
+        "Keywords": "",
+        "FieldName": "AMPPassword",
+        "InputType": "text",
+        "Hidden": true,
+        "ParamFieldName": "AMPPassword",
+        "DefaultValue": "{{newguid()}}",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Database Name",
+        "Category": "PostgreSQL:database",
+        "Subcategory": "Server:dns:1",
+        "Description": "Sets the database to connect to when the client run in AMP is started, if applicable. The database must exist on the server. Alternatively send the command 'use <database name>' in the AMP console to switch to the database",
+        "Keywords": "database,name,dbname",
+        "FieldName": "dbname",
+        "InputType": "text",
+        "ParamFieldName": "dbname",
+        "IncludeInCommandLine": true,
+        "SkipIfEmpty": true,
+        "DefaultValue": "",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Server Config File Settings",
+        "Category": "PostgreSQL:database",
+        "Subcategory": "Server:dns:1",
+        "Description": "Config file settings for the PostgreSQL server can be set in 'data/postgresql.conf'. Use with care",
+        "Keywords": "config,file,settings",
+        "FieldName": "ConfigFileSettings",
+        "InputType": "hidden",
+        "ParamFieldName": "ConfigFileSettings",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Additional Client Command Line Options",
+        "Category": "PostgreSQL:database",
+        "Subcategory": "Server:dns:1",
+        "Description": "Specifies [additional command line options](https://www.postgresql.org/docs/17/app-psql.html) for the PostgreSQL client run by AMP (a super user called 'amp') that are not otherwise set by AMP. Use with care\"",
+        "Keywords": "custom,client,options,arguments",
+        "FieldName": "CustomClientOptions",
+        "InputType": "Textarea",
+        "ParamFieldName": "CustomClientOptions",
+        "DefaultValue": "",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "PostgreSQL Release Version",
+        "Category": "Updates",
+        "Subcategory": "Server Updates:build:-1",
+        "Description": "Sets the PostgreSQL release version from which to install the latest point release. Select \"Custom\" to install the specific point release set under PostgreSQL Custom Point Release Version. WARNING: SWITCHING BETWEEN MAJOR RELEASE VERSIONS MAY CORRUPT DATA! Update the server after changing this setting",
+        "Keywords": "postgresql,release,version",
+        "FieldName": "ServerVersion",
+        "InputType": "enum",
+        "ParamFieldName": "ServerVersion",
+        "DefaultValue": "16",
+        "EnumValues": {
+            "17": "17",
+            "16": "16 (default)",
+            "15": "15",
+            "14": "14",
+            "13": "13",
+            "": "--Custom--"
+        }
+    },
+    {
+        "DisplayName": "PostgreSQL Custom Point Release Version",
+        "Category": "Updates",
+        "Subcategory": "Server Updates:build:-1",
+        "Description": "Sets the [PostgreSQL point release version](https://www.postgresql.org/ftp/source/) to install, if \"Custom\" is selected under PostgreSQL Release Version. WARNING: SWITCHING BETWEEN MAJOR RELEASE VERSIONS MAY CORRUPT DATA! Update the server after changing this setting",
+        "Keywords": "postgresql,custom,point,release,version",
+        "FieldName": "CustomServerVersion",
+        "InputType": "text",
+        "ParamFieldName": "CustomServerVersion",
+        "DefaultValue": "",
+        "Placeholder": "16.4",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Disable PostgreSQL Download",
+        "Category": "Updates",
+        "Subcategory": "Server Updates:build:-1",
+        "Description": "If set, PostgreSQL will not be downloaded and installed when the server is updated. Saves on bandwidth if you don't need to change the PostgreSQL point release version already installed in the instance",
+        "Keywords": "postgresql,download,update",
+        "FieldName": "DisablePostgreSQLDownload",
+        "InputType": "checkbox",
+        "ParamFieldName": "DisablePostgreSQLDownload",
+        "DefaultValue": "false",
+        "EnumValues": {
+            "False": "false",
+            "True": "true"
+        }
+    }
+]
