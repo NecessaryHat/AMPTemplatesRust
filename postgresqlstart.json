@@ -13,7 +13,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd postgresql/pgsql && export PGPASSWORD={{AMPPassword}} && timeout=60; while ((timeout--)); do bin/pg_isready --host=\\\"{{$FullBaseDir}}run\\\" --port={{$ServerPort}} --username=amp --dbname=postgres >/dev/null 2>&1 && break || sleep 1; done; ((timeout<0)) && { echo \\\"PostgreSQL server failed to start. Aborting\\\"; exit 1; }\"",
+        "UpdateSourceArgs": "-c \"cd postgresql/pgsql && export PGPASSWORD={{AMPPassword}} && timeout=60; while ((timeout--)); do bin/pg_isready --host=\\\"{{$FullBaseDir}}run\\\" --port={{$ServerPort}} --username=amp --dbname=postgres >/dev/null 2>&1 && exit 0 || sleep 1; done; ((timeout<0)) && { echo \\\"PostgreSQL server failed to start. Aborting\\\"; exit 1; }\"",
         "SkipOnFailure": false
     }
 ]
