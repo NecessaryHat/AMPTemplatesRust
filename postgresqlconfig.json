@@ -16,14 +16,15 @@
         "DisplayName": "Database Name",
         "Category": "PostgreSQL:database",
         "Subcategory": "Server:dns:1",
-        "Description": "Sets the database to connect to when the client run in AMP is started, if applicable. The database must exist on the server. Alternatively send the command 'use <database name>' in the AMP console to switch to the database",
+        "Description": "Sets the database to connect to when the client run in AMP is started. The database must exist on the server",
         "Keywords": "database,name,dbname",
         "FieldName": "dbname",
         "InputType": "text",
         "ParamFieldName": "dbname",
         "IncludeInCommandLine": true,
-        "SkipIfEmpty": true,
-        "DefaultValue": "",
+        "Required": true,
+        "DefaultValue": "postgres",
+        "Placeholder": "postgres",
         "EnumValues": {}
     },
     {
