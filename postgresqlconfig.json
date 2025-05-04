@@ -16,7 +16,7 @@
         "DisplayName": "Database Name",
         "Category": "PostgreSQL:database",
         "Subcategory": "Server:dns:1",
-        "Description": "Sets the database to connect to when the client run in AMP is started. The database must exist on the server",
+        "Description": "Sets the database to connect to when the client run in AMP is started. The database must exist on the server. Use the command '\\connect <database name>' in the AMP console to switch to another database once connected",
         "Keywords": "database,name,dbname",
         "FieldName": "dbname",
         "InputType": "text",
