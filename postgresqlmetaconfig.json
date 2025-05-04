@@ -1,15 +1,1 @@
-[
-    {
-        "ConfigFile": "data/postgresql.conf",
-        "ConfigType": "kvp",
-        "ConfigFormat": "{0}{1}",
-        "Subsections": [
-            {
-                "Heading": "$root",
-                "SettingMappings": {
-                    "": "ConfingFileSettings"
-                }
-            }
-        ]
-    }
-]
+[]
