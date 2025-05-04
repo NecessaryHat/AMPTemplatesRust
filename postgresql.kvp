@@ -43,7 +43,7 @@ App.CommandLineParameterFormat=--{0}={1}
 App.CommandLineParameterDelimiter= 
 App.ExitMethod=String
 App.ExitTimeout=10
-App.ExitString=\! bin/pg_ctl stop -D ./data -m fast;
+App.ExitString=\\! bin/pg_ctl stop -D ./data -m fast;
 App.ExitFile=app_exit.lck
 App.HasWriteableConsole=True
 App.HasReadableConsole=True
