@@ -42,7 +42,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd postgresql/pgsql && { [[ -f ./data/PG_VERSION ]] || bin/initdb --pgdata=\\\"{{$FullBaseDir}}data\\\" --auth=md5 --username=amp --pwfile=<(echo \\\"{{AMPPassword}}\\\"); } && { grep -q \\\"# Custom AMP rules\\\" \\\"{{$FullBaseDir}}data/pg_hba.conf\\\" || echo -e \\\"# Custom AMP rules\nlocal   all             all                                     md5\nhost    all             all             0.0.0.0/0               md5\\\" >> \\\"{{$FullBaseDir}}data/pg_hba.conf\\\"; }\"",
+        "UpdateSourceArgs": "-c \"cd postgresql/pgsql && { [[ -f ./data/PG_VERSION ]] || bin/initdb --pgdata=\\\"{{$FullBaseDir}}data\\\" --auth=md5 --username=amp --pwfile=<(echo \\\"{{AMPPassword}}\\\"); } && { grep -q \\\"# Custom AMP rules\\\" \\\"{{$FullBaseDir}}data/pg_hba.conf\\\" || echo -e \\\"# Custom AMP rules\nhost    all             all             0.0.0.0/0               md5\\\" >> \\\"{{$FullBaseDir}}data/pg_hba.conf\\\"; }\"",
         "SkipOnFailure": false
     }
 ]
