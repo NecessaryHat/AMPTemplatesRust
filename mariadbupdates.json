@@ -24,45 +24,19 @@
         "UpdateSourceArgs": "{{$FullBaseDir}}run/mariadbd"
     },
     {
-        "UpdateStageName": "MariaDB Download",
+        "UpdateStageName": "Download MariaDB",
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"ServerVersion=\\\"{{ServerVersion}}\\\"; CustomServerVersion=\\\"{{CustomServerVersion}}\\\"; cd mariadb && if [[ -z \\\"$ServerVersion\\\" ]]; then if [[ ! \\\"$CustomServerVersion\\\" =~ ^(10|11|12)\\.[0-9]+\\.[0-9]+$ ]]; then echo \\\"Invalid MariaDB version format specified\\\" && exit 1; else DownloadURL=http://downloads.mariadb.org/rest-api/mariadb/$CustomServerVersion/mariadb-$CustomServerVersion-linux-systemd-x86_64.tar.gz && OutputMessage=\\\"MariaDB v$CustomServerVersion downloaded\\\"; fi; else DownloadURL=$(wget -qO- \\\"https://downloads.mariadb.org/rest-api/mariadb/$ServerVersion/latest\\\" | jq -r \\\".releases[] | .files[] | select(.file_name | test(\\\\\\\"^mariadb-{{ServerVersion}}.[0-9]+-linux-systemd-x86_64.tar.gz$\\\\\\\")) | .file_download_url\\\") && OutputMessage=\\\"Latest MariaDB v$ServerVersion downloaded\\\"; fi; wget -qO mariadb.tar.gz $DownloadURL && [[ -d mariadb/lib/plugin ]] && mv mariadb/lib/plugin plugin.bak; rm -rf mariadb/* && mkdir -p mariadb/lib && [[ -d plugin.bak ]] && mv plugin.bak mariadb/lib/plugin; tar -xzf mariadb.tar.gz -C mariadb --strip-components=1 >/dev/null 2>&1 && rm -rf mariadb.tar.gz >/dev/null 2>&1 && echo \\\"$OutputMessage\\\"\"",
-        "UpdateSourceConditionSetting": "DisableMariaDBDownload",
-        "UpdateSourceConditionValue": "false",
+        "UpdateSourceArgs": "-c \"ServerVersion=\\\"{{ServerVersion}}\\\"; CustomServerVersion=\\\"{{CustomServerVersion}}\\\"; cd mariadb && if command -v mariadb/bin/mariadbd >/dev/null 2>&1; then InstalledVersion=$(mariadb/bin/mariadbd -V | sed -E \\\"s/^.*Ver ([0-9]+\\.[0-9]+\\.[0-9]+)-MariaDB.*/\\1/\\\"); else InstalledVersion=\\\"\\\"; fi; if [[ -z \\\"$ServerVersion\\\" ]]; then if [[ ! \\\"$CustomServerVersion\\\" =~ ^(10|11|12)\\.[0-9]+\\.[0-9]+$ ]]; then echo \\\"Invalid MariaDB version format specified\\\" && exit 1; elif [ \\\"$InstalledVersion\\\" = \\\"$CustomServerVersion\\\" ]; then echo \\\"MariaDB v$CustomServerVersion already installed. Skipping\\\" && exit 0; else DownloadURL=http://downloads.mariadb.org/rest-api/mariadb/$CustomServerVersion/mariadb-$CustomServerVersion-linux-systemd-x86_64.tar.gz && OutputMessage=\\\"MariaDB v$CustomServerVersion downloaded\\\"; fi; else LatestVersion=$(wget -qO- \\\"https://downloads.mariadb.org/rest-api/mariadb/$ServerVersion/latest\\\" | jq -r \\\".releases | keys_unsorted[0]\\\") && if [ \\\"$InstalledVersion\\\" = \\\"$LatestVersion\\\" ]; then echo \\\"MariaDB v$LatestVersion already installed. Skipping\\\" && exit 0; else DownloadURL=http://downloads.mariadb.org/rest-api/mariadb/$LatestVersion/mariadb-$LatestVersion-linux-systemd-x86_64.tar.gz && OutputMessage=\\\"MariaDB v$LatestVersion downloaded\\\"; fi; fi; wget -qO mariadb.tar.gz $DownloadURL && [[ -d mariadb/lib/plugin ]] && mv mariadb/lib/plugin plugin.bak; rm -rf mariadb/* && mkdir -p mariadb/lib && [[ -d plugin.bak ]] && mv plugin.bak mariadb/lib/plugin; tar -xzf mariadb.tar.gz -C mariadb --strip-components=1 >/dev/null 2>&1 && rm -rf mariadb.tar.gz >/dev/null 2>&1 && echo \\\"$OutputMessage\\\"\"",
         "SkipOnFailure": false
     },
     {
-        "UpdateStageName": "MariaDB Download",
+        "UpdateStageName": "Download MariaDB",
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"$ProgressPreference='SilentlyContinue'; $ServerVersion='{{ServerVersion}}'; $CustomServerVersion='{{CustomServerVersion}}'; if ( [string]::IsNullOrWhiteSpace($ServerVersion) ) { if ( $CustomServerVersion -notmatch '^(10|11|12)\\.[0-9]+\\.[0-9]+$' ) { Write-Output 'Invalid MariaDB version format specified'; exit 1 } else { $DownloadURL=\\\"http://downloads.mariadb.org/rest-api/mariadb/$CustomServerVersion/mariadb-$CustomServerVersion-winx64.zip\\\"; $OutputMessage=\\\"MariaDB v$CustomServerVersion downloaded\\\" } } else { $DownloadURL=(Invoke-RestMethod -Uri (\\\"https://downloads.mariadb.org/rest-api/mariadb/$ServerVersion/latest\\\") -UseBasicParsing).releases.PSObject.Properties.Value.files | Where-Object { $_.file_name -match '^mariadb-{{ServerVersion}}.*-winx64\\.zip$' } | Select-Object -First 1 -ExpandProperty file_download_url; $OutputMessage=\\\"Latest MariaDB v$ServerVersion downloaded\\\" }; Invoke-WebRequest -UseBasicParsing -Uri $DownloadURL -OutFile mariadb.zip; Write-Output $OutputMessage\"",
-        "UpdateSourceConditionSetting": "DisableMariaDBDownload",
-        "UpdateSourceConditionValue": "false",
-        "SkipOnFailure": false
-    },
-    {
-        "UpdateStageName": "MariaDB Extract",
-        "UpdateSourcePlatform": "Windows",
-        "UpdateSource": "ExtractArchive",
-        "UpdateSourceData": "mariadb.zip",
-        "UpdateSourceTarget": "{{$FullBaseDir}}",
-        "OverwriteExistingFiles": true,
-        "DeleteAfterExtract": true,
-        "UpdateSourceConditionSetting": "DisableMariaDBDownload",
-        "UpdateSourceConditionValue": "false",
-        "SkipOnFailure": false
-    },
-    {
-        "UpdateStageName": "MariaDB Installation",
-        "UpdateSourcePlatform": "Windows",
-        "UpdateSource": "Executable",
-        "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb'; Move-Item 'mariadb/lib/plugin' 'plugin.bak' -Force *> $null; Get-ChildItem 'mariadb' | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue *> $null; New-Item 'mariadb/lib' -ItemType Directory -Force | Out-Null; Move-Item 'plugin.bak' 'mariadb/lib/plugin' -Force *> $null; $source = Get-ChildItem -Directory -Filter 'mariadb-*' | Select-Object -First 1; if ($source) { robocopy $source.FullName 'mariadb' /E /MOVE /NFL /NDL /NJH /NJS /NP *> $null; if ($LASTEXITCODE -gt 7) { exit $LASTEXITCODE } }; exit 0\"",
-        "UpdateSourceConditionSetting": "DisableMariaDBDownload",
-        "UpdateSourceConditionValue": "false",
+        "UpdateSourceArgs": "-NoProfile -Command \"$ProgressPreference='SilentlyContinue'; $ServerVersion='{{ServerVersion}}'; $CustomServerVersion='{{CustomServerVersion}}'; Set-Location -Path 'mariadb'; if ( Test-Path 'mariadb/bin/mariadbd.exe' ) { $match = & mariadb/bin/mariadbd.exe -V | Select-String -Pattern 'Ver ([0-9]+\\.[0-9]+\\.[0-9]+)-MariaDB'; $InstalledVersion = $match.Matches[0].Groups[1].Value } else { $InstalledVersion = '' }; if ( [string]::IsNullOrWhiteSpace($ServerVersion) ) { if ( $CustomServerVersion -notmatch '^(10|11|12)\\.[0-9]+\\.[0-9]+$' ) { Write-Output 'Invalid MariaDB version format specified'; exit 1 } elseif ( $InstalledVersion -eq $CustomServerVersion ) { Write-Output 'MariaDB v$CustomServerVersion already installed. Skipping'; exit 0 } else { $DownloadURL=\\\"http://downloads.mariadb.org/rest-api/mariadb/$CustomServerVersion/mariadb-$CustomServerVersion-winx64.zip\\\"; $OutputMessage=\\\"MariaDB v$CustomServerVersion downloaded\\\" } } else { $LatestVersion = (Invoke-WebRequest -UseBasicParsing -Uri \\\"https://downloads.mariadb.org/rest-api/mariadb/$ServerVersion/latest\\\").Content | ConvertFrom-Json | ForEach-Object { $_.releases.PSObject.Properties[0].Name }; if ( $InstalledVersion -eq $LatestVersion ) { Write-Output 'MariaDB v$LatestVersion already installed. Skipping'; exit 0 } else { $DownloadURL=\\\"http://downloads.mariadb.org/rest-api/mariadb/$LatestVersion/mariadb-$LatestVersion-winx64.zip\\\"; $OutputMessage=\\\"MariaDB v$LatestVersion downloaded\\\" } }; if ( Test-Path 'mariadb/lib/plugin' ) { Move-Item 'mariadb/lib/plugin' 'plugin.bak' -Force *> $null }; Remove-Item mariadb/* -Recurse -Force -ErrorAction SilentlyContinue *> $null; New-Item 'mariadb/lib' -ItemType Directory -Force | Out-Null; Move-Item 'plugin.bak' 'mariadb/lib/plugin' -Force *> $null; if ( Test-Path mariadb.zip ) { Remove-Item mariadb.zip -Force -ErrorAction SilentlyContinue *> $null }; Invoke-WebRequest -UseBasicParsing -Uri $DownloadURL -OutFile mariadb.zip; Expand-Archive -Path \\\"mariadb.zip\\\" -DestinationPath \\\"mariadb\\\" -Force *> $null; Remove-Item mariadb.zip -Force -ErrorAction SilentlyContinue *> $null; Write-Output $OutputMessage\"",
         "SkipOnFailure": false
     },
     {
