@@ -1,8 +1,8 @@
 Meta.DisplayName=PostgreSQL
 Meta.Description=PostgreSQL Service Instance
 Meta.OS=Linux
-Meta.AarchSupport=Unknown
-Meta.Arch=x86_64
+Meta.AarchSupport=Native
+Meta.Arch=All
 Meta.Author=Greelan
 Meta.URL=https://www.postgresql.org/
 Meta.DisplayImageSource=url:https://download.logo.wine/logo/PostgreSQL/PostgreSQL-Logo.wine.png
