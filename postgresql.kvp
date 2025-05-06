@@ -28,7 +28,7 @@ Meta.AppConfigId=d9f557e2-7b9c-429f-a8a5-8a2fd75c2955
 Meta.ImportableExtensions=[]
 App.DisplayName=PostgreSQL
 App.RootDir=./postgresql/
-App.BaseDirectory=./postgresql/pgsql/
+App.BaseDirectory=./postgresql/
 App.SteamWorkshopDownloadLocation=
 App.ExecutableWin= 
 App.ExecutableLinux=pgsql/bin/psql
@@ -38,7 +38,7 @@ App.WindowsCommandLineArgs=
 App.CommandLineArgs={{CustomClientOptions}} {{$PlatformArgs}} --username=amp {{$FormattedArgs}}
 App.UseLinuxIOREDIR=False
 App.AppSettings={}
-App.EnvironmentVariables={"PATH":"{{$FullBaseDir}}bin:%PATH%","MANPATH":"{{$FullBaseDir}}share/man","LD_LIBRARY_PATH":"{{$FullBaseDir}}lib:%LD_LIBRARY_PATH%","PGHOST":"{{$FullBaseDir}}run","PGPORT":"{{$ServerPort}}","PGPASSWORD":"{{AMPPassword}}"}
+App.EnvironmentVariables={"PATH":"{{$FullBaseDir}}pgsql/bin:%PATH%","MANPATH":"{{$FullBaseDir}}pgsql/share/man","LD_LIBRARY_PATH":"{{$FullBaseDir}}pgsql/lib:%LD_LIBRARY_PATH%","PGHOST":"{{$FullBaseDir}}run","PGPORT":"{{$ServerPort}}","PGPASSWORD":"{{AMPPassword}}"}
 App.CommandLineParameterFormat=--{0}={1}
 App.CommandLineParameterDelimiter= 
 App.ExitMethod=String
