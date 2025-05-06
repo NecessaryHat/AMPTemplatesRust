@@ -32,7 +32,7 @@ App.BaseDirectory=./postgresql/
 App.SteamWorkshopDownloadLocation=
 App.ExecutableWin= 
 App.ExecutableLinux=pgsql/bin/psql
-App.WorkingDir=pgsql
+App.WorkingDir=
 App.LinuxCommandLineArgs=
 App.WindowsCommandLineArgs=
 App.CommandLineArgs={{CustomClientOptions}} {{$PlatformArgs}} --username=amp {{$FormattedArgs}}
@@ -43,7 +43,7 @@ App.CommandLineParameterFormat=--{0}={1}
 App.CommandLineParameterDelimiter= 
 App.ExitMethod=String
 App.ExitTimeout=10
-App.ExitString=\\! bin/pg_ctl stop -D ../data -m fast;
+App.ExitString=\\! pgsql/bin/pg_ctl stop -D ./data -m fast;
 App.ExitFile=app_exit.lck
 App.HasWriteableConsole=True
 App.HasReadableConsole=True
