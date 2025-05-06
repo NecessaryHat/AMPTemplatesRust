@@ -44,7 +44,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mariadb/mariadb && { [[ -f ../data/mysql/user.frm ]] || scripts/mariadb-install-db --no-defaults --port={{$ServerPort}} --basedir=./ --datadir=../data; }\"",
+        "UpdateSourceArgs": "-c \"cd mariadb && { [[ -f \\\"{{$FullBaseDir}}data/mysql/user.frm\\\" ]] || mariadb/scripts/mariadb-install-db --no-defaults --port={{$ServerPort}} --basedir=\\\"{{$FullBaseDir}}mariadb\\\" --datadir=\\\"{{$FullBaseDir}}data\\\"; }\"",
         "SkipOnFailure": false
     },
     {
@@ -52,7 +52,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb/mariadb'; if (Test-Path '../data/mysql/user.frm') { exit 0 } else { & bin/mariadb-install-db.exe --port={{$ServerPort}} --datadir=../data }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb'; if (Test-Path '{{$FullBaseDir}}data/mysql/user.frm') { exit 0 } else { & mariadb/bin/mariadb-install-db.exe --port={{$ServerPort}} --datadir=\\\"{{$FullBaseDir}}data\\\" }\"",
         "SkipOnFailure": false
     },
     {
