@@ -38,12 +38,12 @@ App.WindowsCommandLineArgs=
 App.CommandLineArgs={{CustomClientOptions}} {{$PlatformArgs}} --username=amp --pset=pager=off {{$FormattedArgs}}
 App.UseLinuxIOREDIR=False
 App.AppSettings={}
-App.EnvironmentVariables={"PATH":"{{$FullBaseDir}}pgsql/bin:%PATH%","MANPATH":"{{$FullBaseDir}}pgsql/share/man","LD_LIBRARY_PATH":"{{$FullBaseDir}}pgsql/lib:%LD_LIBRARY_PATH%","PGHOST":"{{$FullBaseDir}}run","PGPORT":"{{$ServerPort}}","PGPASSWORD":"{{AMPPassword}}"}
+App.EnvironmentVariables={"PATH":"{{$FullBaseDir}}pgsql/bin:%PATH%","MANPATH":"{{$FullBaseDir}}pgsql/share/man","LD_LIBRARY_PATH":"{{$FullBaseDir}}pgsql/lib:%LD_LIBRARY_PATH%","PGHOME":"{{$FullBaseDir}}pgsql","PGDATA":"{{$FullBaseDir}}data","PGHOST":"{{$FullBaseDir}}run","PGPORT":"{{$ServerPort}}","PGPASSWORD":"{{AMPPassword}}"}
 App.CommandLineParameterFormat=--{0}={1}
 App.CommandLineParameterDelimiter= 
 App.ExitMethod=String
 App.ExitTimeout=10
-App.ExitString=\\! pgsql/bin/pg_ctl stop -D ./data -m fast
+App.ExitString=\\! pg_ctl stop -m fast
 App.ExitFile=app_exit.lck
 App.HasWriteableConsole=True
 App.HasReadableConsole=True
