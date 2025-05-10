@@ -44,7 +44,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mariadb && { [[ -f \\\"{{$FullBaseDir}}data/mysql/user.frm\\\" ]] || mariadb/scripts/mariadb-install-db --no-defaults --port={{$ServerPort}} --basedir=\\\"{{$FullBaseDir}}mariadb\\\" --datadir=\\\"{{$FullBaseDir}}data\\\" >/dev/null; }\"",
+        "UpdateSourceArgs": "-c \"cd mariadb && { [[ -f \\\"{{$FullBaseDir}}data/mysql/user.frm\\\" ]] || { mariadb/scripts/mariadb-install-db --no-defaults --port={{$ServerPort}} --basedir=\\\"{{$FullBaseDir}}mariadb\\\" --datadir=\\\"{{$FullBaseDir}}data\\\" >/dev/null; echo \\\"\\nDefault database tables created\\nSuper-users amp@localhost and root@localhost created with unix socket authentication\\nUse AMP's console to manage the server via the amp@localhost user\\n\\\"; }; }\"",
         "SkipOnFailure": false
     },
     {
@@ -52,7 +52,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb'; if (Test-Path '{{$FullBaseDir}}data/mysql/user.frm') { exit 0 } else { & mariadb/bin/mariadb-install-db.exe --port={{$ServerPort}} --datadir=\\\"{{$FullBaseDir}}data\\\" 1> $null }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mariadb'; if (Test-Path '{{$FullBaseDir}}data/mysql/user.frm') { exit 0 } else { & mariadb/bin/mariadb-install-db.exe --port={{$ServerPort}} --datadir=\\\"{{$FullBaseDir}}data\\\" 1> $null; Write-Output \\\"\\nDefault database tables created\\nSuper-users root@localhost, root@127.0.0.1 and (if applicable) root@::1 created with secure password authentication\\nUse AMP's console to manage the server via the root@localhost user\\n\\\" }\"",
         "SkipOnFailure": false
     },
     {
