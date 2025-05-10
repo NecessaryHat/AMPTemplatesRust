@@ -29,7 +29,7 @@
         "DisplayName": "Database Name",
         "Category": "MariaDB:database",
         "Subcategory": "Server:dns:1",
-        "Description": "Sets the database to connect to when the client run in AMP is started, if applicable. The database must exist on the server. Alternatively send the command 'use <database name>' in the AMP console to switch to the database",
+        "Description": "Optionally sets the initial database to connect to when the client run in AMP is started. The database must exist on the server. Alternatively send the command 'use <database name>' in the AMP console to switch to a specific database",
         "Keywords": "database,name",
         "FieldName": "database",
         "InputType": "text",
