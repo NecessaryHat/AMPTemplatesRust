@@ -38,7 +38,7 @@ App.WindowsCommandLineArgs=
 App.CommandLineArgs={{CustomClientOptions}} {{$PlatformArgs}} --username=amp --pset=pager=off {{$FormattedArgs}}
 App.UseLinuxIOREDIR=False
 App.AppSettings={}
-App.EnvironmentVariables={"PATH":"{{$FullBaseDir}}pgsql/bin:%PATH%","MANPATH":"{{$FullBaseDir}}pgsql/share/man","LD_LIBRARY_PATH":"{{$FullBaseDir}}pgsql/lib:%LD_LIBRARY_PATH%","PGHOME":"{{$FullBaseDir}}pgsql","PGDATA":"{{$FullBaseDir}}data","PGHOST":"{{$FullBaseDir}}run","PGPORT":"{{$ServerPort}}","PGPASSWORD":"{{AMPPassword}}"}
+App.EnvironmentVariables={"PATH":"{{$FullBaseDir}}pgsql/bin:%PATH%","MANPATH":"{{$FullBaseDir}}pgsql/share/man","LD_LIBRARY_PATH":"{{$FullBaseDir}}pgsql/lib:%LD_LIBRARY_PATH%","PGDATA":"{{$FullBaseDir}}data","PGHOST":"{{$FullBaseDir}}run","PGPORT":"{{$ServerPort}}","PGPASSWORD":"{{AMPPassword}}"}
 App.CommandLineParameterFormat=--{0}={1}
 App.CommandLineParameterDelimiter= 
 App.ExitMethod=String
