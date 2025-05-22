@@ -25,7 +25,7 @@
         "UpdateSourceArgs": "-c \"cd postgresql && export PGPASSWORD={{AMPPassword}} && timeout=60; while ((timeout--)); do pgsql/bin/pg_isready --host=\\\"{{$FullBaseDir}}run\\\" --port={{$ServerPort}} --username=amp --dbname=postgres >/dev/null 2>&1 && exit 0 || sleep 1; done; ((timeout<0)) && { echo \\\"PostgreSQL server failed to start. Aborting\\\"; exit 1; }\"",
         "SkipOnFailure": false
     },
-     {
+    {
         "UpdateStageName": "Wait For Server Start",
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
