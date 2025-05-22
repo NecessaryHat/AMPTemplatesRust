@@ -34,7 +34,7 @@ App.ExecutableWin=mysql\bin\mysql.exe
 App.ExecutableLinux=mysql/bin/mysql
 App.WorkingDir=
 App.LinuxCommandLineArgs=--protocol=socket --socket="{{$FullBaseDir}}run/mysqld/mysqld.sock" --user=amp
-App.WindowsCommandLineArgs=--protocol=pipe --socket={{WindowsSocketName}} --user=root
+App.WindowsCommandLineArgs=--protocol=pipe --socket={{WindowsSocketName}} --user=root --get-server-public-key
 App.CommandLineArgs={{CustomClientOptions}} {{$PlatformArgs}} --reconnect --force {{$FormattedArgs}}
 App.UseLinuxIOREDIR=False
 App.AppSettings={}
