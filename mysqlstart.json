@@ -4,7 +4,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mysql && mysql/bin/mysqladmin --socket=\\\"{{$FullBaseDir}}run/mysqld/mysqld.sock\\\" ping >/dev/null 2>&1 && exit 0 || { rm-rf run/* >/dev/null 2>&1; mysql/bin/mysqld --defaults-file=\\\"{{$FullBaseDir}}my.cnf\\\" --port={{$ServerPort}} --mysqlx-port={{$ServerXPort}} --admin-port={{$AdminPort}} --basedir=\\\"{{$FullBaseDir}}mysql\\\" --datadir=\\\"{{$FullBaseDir}}data\\\" --pid-file=\\\"{{$FullBaseDir}}run/mysqld/mysqld.pid\\\" --socket=\\\"{{$FullBaseDir}}run/mysqld/mysqld.sock\\\" --mysqlx-socket=\\\"{{$FullBaseDir}}run/mysqld/mysqlx.sock\\\" --bind-address=0.0.0.0 --mysqlx-bind-address=0.0.0.0 --plugin-load-add=auth_socket.so --general-log-file=\\\"{{$FullBaseDir}}log/mysql/mysql.log\\\" --wait-timeout=28800 --upgrade=FORCE &; }\"",
+        "UpdateSourceArgs": "-c \"cd mysql && mysql/bin/mysqladmin --socket=\\\"{{$FullBaseDir}}run/mysqld/mysqld.sock\\\" ping >/dev/null 2>&1 && exit 0 || { rm -rf run/* >/dev/null 2>&1; mysql/bin/mysqld --defaults-file=\\\"{{$FullBaseDir}}my.cnf\\\" --port={{$ServerPort}} --mysqlx-port={{$ServerXPort}} --admin-port={{$AdminPort}} --basedir=\\\"{{$FullBaseDir}}mysql\\\" --datadir=\\\"{{$FullBaseDir}}data\\\" --pid-file=\\\"{{$FullBaseDir}}run/mysqld/mysqld.pid\\\" --socket=\\\"{{$FullBaseDir}}run/mysqld/mysqld.sock\\\" --mysqlx-socket=\\\"{{$FullBaseDir}}run/mysqld/mysqlx.sock\\\" --bind-address=0.0.0.0 --mysqlx-bind-address=0.0.0.0 --plugin-load-add=auth_socket.so --general-log-file=\\\"{{$FullBaseDir}}log/mysql/mysql.log\\\" --wait-timeout=28800 --upgrade=FORCE &; }\"",
         "RunInBackground": true,
         "SkipOnFailure": false
     },
