@@ -52,7 +52,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mysql'; if (Test-Path '{{$FullBaseDir}}data/mysql/mysql.ibd') { exit 0 } else { & mysql/bin/mysqld.exe --initialize --port={{$ServerPort}} --basedir=\\\"{{$FullBaseDir}}mysql\\\" --datadir=\\\"{{$FullBaseDir}}data\\\" --console 1> $null; Write-Output \\\"`nDefault database tables created`nSuper-users root@localhost, root@127.0.0.1 and (if applicable) root@::1 created with secure password authentication`nUse AMP's console to manage the server via the root@localhost user`n\\\" }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mysql'; if (Test-Path '{{$FullBaseDir}}data/mysql/mysql.ibd') { exit 0 } else { & mysql/bin/mysqld.exe --initialize --port={{$ServerPort}} --basedir=\\\"{{$FullBaseDir}}mysql\\\" --datadir=\\\"{{$FullBaseDir}}data\\\" --console 1> $null; if ($?) { Write-Output \\\"`nDefault database tables created`nSuper-users root@localhost, root@127.0.0.1 and (if applicable) root@::1 created with secure password authentication`nUse AMP's console to manage the server via the root@localhost user`n\\\" } }\"",
         "SkipOnFailure": false
     },
     {
