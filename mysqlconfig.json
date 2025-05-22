@@ -55,7 +55,7 @@
         "DisplayName": "Additional Client Command Line Options",
         "Category": "MySQL:database",
         "Subcategory": "Server:dns:1",
-        "Description": "Specifies [additional command line options](https://mysql.com/kb/en/mysql-options/) for the MySQL client run by AMP (a super user called 'amp' on Linux and 'root' on Windows) that are not otherwise set by AMP. Use with care",
+        "Description": "Specifies [additional command line options](https://mysql.com/kb/en/mysql-options/) for the MySQL client run by AMP (the 'root' super user) that are not otherwise set by AMP. Use with care",
         "Keywords": "custom,client,options,arguments",
         "FieldName": "CustomClientOptions",
         "InputType": "Textarea",

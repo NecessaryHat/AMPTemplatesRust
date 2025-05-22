@@ -22,7 +22,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mysql && timeout=60; while ((timeout--)); do mysql/bin/mysqladmin --socket=\\\"{{$FullBaseDir}}run/mysqld/mysqld.sock\\\" ping >/dev/null 2>&1 && break || sleep 1; done; ((timeout<0)) && { echo \\\"MySQL server failed to start. Aborting\\\"; exit 1; }; mysql/bin/mysql --socket=\\\"{{$FullBaseDir}}run/mysqld/mysqld.sock\\\" --user=amp -e \\\"FLUSH PRIVILEGES; ALTER USER 'root'@'localhost' IDENTIFIED WITH auth_socket; ALTER USER 'amp'@'localhost' IDENTIFIED WITH auth_socket; DELETE FROM mysql.user WHERE User=''; DROP DATABASE IF EXISTS test; DELETE FROM mysql.db WHERE Db='test' OR Db='test\\\\_%'; FLUSH PRIVILEGES\\\"\"",
+        "UpdateSourceArgs": "-c \"cd mysql && timeout=60; while ((timeout--)); do mysql/bin/mysqladmin --socket=\\\"{{$FullBaseDir}}run/mysqld/mysqld.sock\\\" ping >/dev/null 2>&1 && break || sleep 1; done; ((timeout<0)) && { echo \\\"MySQL server failed to start. Aborting\\\"; exit 1; }; mysql/bin/mysql --socket=\\\"{{$FullBaseDir}}run/mysqld/mysqld.sock\\\" --user=root -e \\\"FLUSH PRIVILEGES; ALTER USER 'root'@'localhost' IDENTIFIED WITH auth_socket; DELETE FROM mysql.user WHERE User=''; DROP DATABASE IF EXISTS test; DELETE FROM mysql.db WHERE Db='test' OR Db='test\\\\_%'; FLUSH PRIVILEGES\\\"\"",
         "SkipOnFailure": false
     },
     {
