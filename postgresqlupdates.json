@@ -7,7 +7,7 @@
     },
     {
         "UpdateStageName": "Create Data Directory",
-        "UpdateSourcePlatform": "Linux",
+        "UpdateSourcePlatform": "All",
         "UpdateSource": "CreateDirectory",
         "UpdateSourceArgs": "{{$FullBaseDir}}data"
     },
@@ -26,11 +26,27 @@
         "SkipOnFailure": false
     },
     {
+        "UpdateStageName": "Download PostgreSQL",
+        "UpdateSourcePlatform": "Windows",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "powershell.exe",
+        "UpdateSourceArgs": "-NoProfile -Command \"$ProgressPreference='SilentlyContinue'; $ServerVersion='{{ServerVersion}}'; $CustomServerVersion='{{CustomServerVersion}}'; Set-Location -Path 'postgresql'; if (Test-Path 'pgsql/bin/postgres') { $match = & pgsql/bin/postgres -V | Select-String -Pattern '(PostgreSQL) ([0-9]+\\.[0-9]+)'; $InstalledVersion = $match.Matches[0].Groups[1].Value } else { $InstalledVersion = '' }; if ( [string]::IsNullOrWhiteSpace($ServerVersion) ) { if ( $CustomServerVersion -notmatch '^(13|14|15|16|17)\\.[0-9]+$' ) { Write-Output 'Invalid PostgreSQL version format specified'; exit 1 } elseif ( $InstalledVersion -eq $CustomServerVersion ) { Write-Output \\\"PostgreSQL v$CustomServerVersion already installed. Skipping\\\"; exit 0 } else { $DownloadURL=\\\"https://get.enterprisedb.com/postgresql/postgresql-$CustomServerVersion-1-windows-x64-binaries.zip\\\"; $OutputMessage=\\\"PostgreSQL v$CustomServerVersion downloaded\\\" } } else { $LatestMinor = ((Invoke-RestMethod -UseBasicParsing -Uri \\\"https://www.postgresql.org/versions.json\\\" | Where-Object { $_.major -eq $ServerVersion } | Select-Object -ExpandProperty latestMinor; LatestVersion=\\\"${ServerVersion}.${LatestMinor}\\\"; if ( $InstalledVersion -eq $LatestVersion ) { Write-Output \\\"PostgreSQL v$LatestVersion already installed. Skipping\\\"; exit 0 } else { $DownloadURL=\\\"https://get.enterprisedb.com/postgresql/postgresql-$LatestVersion-1-windows-x64-binaries.zip\\\"; $OutputMessage=\\\"PostgreSQL v$LatestVersion downloaded\\\" } }; if ( Test-Path postgresql.zip ) { Remove-Item postgresql.zip -Force -ErrorAction SilentlyContinue *> $null }; try { Invoke-WebRequest -UseBasicParsing -Uri $DownloadURL -OutFile postgresql.zip -ErrorAction Stop } catch { Write-Output \\\"Download failed from the PostgreSQL CDN. This is a fault with the CDN, not AMP. Aborting\\\"; exit 1; }; Expand-Archive -Path \\\"postgresql.zip\\\" -DestinationPath \\\".\\\" -Force *> $null; Remove-Item postgresql.zip -Force -ErrorAction SilentlyContinue *> $null; Write-Output $OutputMessage\"",
+        "SkipOnFailure": false
+    },
+    {
         "UpdateStageName": "Initialize PostgreSQL",
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
         "UpdateSourceArgs": "-c \"cd postgresql && { [[ -f \\\"{{$FullBaseDir}}data/PG_VERSION\\\" ]] || { pgsql/bin/initdb --pgdata=\\\"{{$FullBaseDir}}data\\\" --auth=md5 --username=amp --pwfile=<(echo \\\"{{AMPPassword}}\\\"); echo -e \\\"\\nDefault database cluster created, including postgres database\\nDo not delete the postgres database!\\nSuper-user amp created with secure password authentication\\nUse AMP's console to manage the server via the amp user\\n\\\"; }; } && { conf=\\\"{{$FullBaseDir}}data/pg_hba.conf\\\"; grep -Eq \\\"^local\\s+all\\s+amp\\s+peer\\\" \\\"$conf\\\" || echo \\\"local   all             amp                                     peer\\\" >> \\\"$conf\\\"; grep -Eq \\\"^local\\s+all\\s+all\\s+md5\\\" \\\"$conf\\\" || echo \\\"local   all             all                                     md5\\\" >> \\\"$conf\\\"; grep -Eq \\\"^host\\s+all\\s+all\\s+0\\.0\\.0\\.0/0\\s+md5\\\" \\\"$conf\\\" || echo \\\"host    all             all             0.0.0.0/0               md5\\\" >> \\\"$conf\\\"; }\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Initialize PostgreSQL",
+        "UpdateSourcePlatform": "Windows",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "powershell.exe",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'postgresql'; if (!(Test-Path -Path \\\"{{$FullBaseDir}}data/PG_VERSION\\\")) { Set-Content -Path \\\"$env:TEMP/amp_pw.txt\\\" -Value \\\"{{AMPPassword}}\\\"; pgsql/bin/initdb.exe --pgdata=\\\"{{$FullBaseDir}}data\\\" --auth=md5 --username=amp --pwfile=\\\"$env:TEMP/amp_pw.txt\\\"; Remove-Item -Path \\\"$env:TEMP/amp_pw.txt\\\" -Force; Write-Host \\\"`nDefault database cluster created, including postgres database`nDo not delete the postgres database!`nSuper-user amp created with secure password authentication`nUse AMP's console to manage the server via the amp user`n\\\" }; $conf = \\\"{{$FullBaseDir}}data/pg_hba.conf\\\"; if (-not (Select-String -Path $conf -Pattern '^\\s*local\\s+all\\s+amp\\s+127\\.0\\.0\\.1/32\\s+md5')) { Add-Content -Path $conf -Value 'host    all             amp             127.0.0.1/32            md5' }; if (-not (Select-String -Path $conf -Pattern '^\\s*local\\s+all\\s+all\\s+md5')) { Add-Content -Path $conf -Value 'local   all             all                                     md5' }; if (-not (Select-String -Path $conf -Pattern '^\\s*host\\s+all\\s+all\\s+0\\.0\\.0\\.0/0\\s+md5')) { Add-Content -Path $conf -Value 'host    all             all             0.0.0.0/0               md5' }\"",
         "SkipOnFailure": false
     }
 ]
