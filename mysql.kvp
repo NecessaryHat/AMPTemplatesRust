@@ -33,9 +33,9 @@ App.SteamWorkshopDownloadLocation=
 App.ExecutableWin=mysql\bin\mysql.exe
 App.ExecutableLinux=mysql/bin/mysql
 App.WorkingDir=
-App.LinuxCommandLineArgs=--protocol=socket --socket="{{$FullBaseDir}}run/mysqld/mysqld.sock"
-App.WindowsCommandLineArgs=--protocol=pipe --socket={{WindowsSocketName}}
-App.CommandLineArgs=--user=root {{CustomClientOptions}} {{$PlatformArgs}} --reconnect --force {{$FormattedArgs}}
+App.LinuxCommandLineArgs=--protocol=socket --socket="{{$FullBaseDir}}run/mysqld/mysqld.sock" --user=root --skip-password
+App.WindowsCommandLineArgs=--protocol=pipe --socket={{WindowsSocketName}} --user=root
+App.CommandLineArgs={{CustomClientOptions}} {{$PlatformArgs}} --reconnect --force {{$FormattedArgs}}
 App.UseLinuxIOREDIR=False
 App.AppSettings={}
 App.EnvironmentVariables={"PATH":"%PATH%:{{$FullBaseDir}}mysql/bin","MYSQL_PWD":"{{RootPassword}}"}
