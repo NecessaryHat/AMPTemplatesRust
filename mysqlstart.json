@@ -4,7 +4,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mysql && mysql/bin/mysqladmin --socket=\\\"{{$FullBaseDir}}run/mysqld/mysqld.sock\\\" ping >/dev/null 2>&1 && exit 0 || mysql/bin/mysqld --defaults-file=\\\"{{$FullBaseDir}}my.cnf\\\" --port={{$ServerPort}} --mysqlx-port={{$ServerXPort}} --admin-port={{$AdminPort}} --basedir=\\\"{{$FullBaseDir}}mysql\\\" --datadir=\\\"{{$FullBaseDir}}data\\\" --pid-file=\\\"{{$FullBaseDir}}run/mysqld/mysqld.pid\\\" --socket=\\\"{{$FullBaseDir}}run/mysqld/mysqld.sock\\\" --bind-address={{$ApplicationIPBinding}} --general-log-file=\\\"{{$FullBaseDir}}log/mysql/mysql.log\\\" --wait-timeout=28800 --upgrade=FORCE &\"",
+        "UpdateSourceArgs": "-c \"cd mysql && mysql/bin/mysqladmin --socket=\\\"{{$FullBaseDir}}run/mysqld/mysqld.sock\\\" ping >/dev/null 2>&1 && exit 0 || mysql/bin/mysqld --defaults-file=\\\"{{$FullBaseDir}}my.cnf\\\" --port={{$ServerPort}} --mysqlx-port={{$ServerXPort}} --admin-port={{$AdminPort}} --basedir=\\\"{{$FullBaseDir}}mysql\\\" --datadir=\\\"{{$FullBaseDir}}data\\\" --pid-file=\\\"{{$FullBaseDir}}run/mysqld/mysqld.pid\\\" --socket=\\\"{{$FullBaseDir}}run/mysqld/mysqld.sock\\\" --mysqlx-socket=\\\"{{$FullBaseDir}}run/mysqld/mysqlx.sock\\\" --bind-address={{$ApplicationIPBinding}} --mysqlx-bind-address={{$ApplicationIPBinding}} --plugin-load-add=mysql_native_password.so --general-log-file=\\\"{{$FullBaseDir}}log/mysql/mysql.log\\\" --wait-timeout=28800 --upgrade=FORCE &\"",
         "RunInBackground": true,
         "SkipOnFailure": false
     },
@@ -13,7 +13,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mysql'; $env:MYSQL_PWD = \\\"{{RootPassword}}\\\"; & mysql/bin/mysqladmin.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { exit 0 } else { & mysql/bin/mysqld.exe --defaults-file=\\\"{{$FullBaseDir}}my.cnf\\\" --port={{$ServerPort}} --mysqlx-port={{$ServerXPort}} --admin-port={{$AdminPort}} --basedir=\\\"{{$FullBaseDir}}mysql\\\" --datadir=\\\"{{$FullBaseDir}}data\\\" --socket={{WindowsSocketName}} --bind-address=0.0.0.0 --general-log-file=\\\"{{$FullBaseDir}}log/mysql/mysql.log\\\" --wait-timeout=28800 --named-pipe --console --upgrade=FORCE }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mysql'; $env:MYSQL_PWD = \\\"{{RootPassword}}\\\"; & mysql/bin/mysqladmin.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { exit 0 } else { & mysql/bin/mysqld.exe --defaults-file=\\\"{{$FullBaseDir}}my.cnf\\\" --port={{$ServerPort}} --mysqlx-port={{$ServerXPort}} --admin-port={{$AdminPort}} --basedir=\\\"{{$FullBaseDir}}mysql\\\" --datadir=\\\"{{$FullBaseDir}}data\\\" --socket={{WindowsSocketName}} --bind-address=0.0.0.0 --mysqlx-bind-address=0.0.0.0 --plugin-load-add=mysql_native_password.dll --general-log-file=\\\"{{$FullBaseDir}}log/mysql/mysql.log\\\" --wait-timeout=28800 --named-pipe --console --upgrade=FORCE }\"",
         "RunInBackground": true,
         "SkipOnFailure": false
     },
