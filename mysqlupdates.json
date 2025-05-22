@@ -44,7 +44,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mysql && { [[ -f \\\"{{$FullBaseDir}}data/mysql/mysql.ibd\\\" ]] || { mysql/bin/mysqld --initialize-insecure --port={{$ServerPort}} --basedir=\\\"{{$FullBaseDir}}mysql\\\" --datadir=\\\"{{$FullBaseDir}}data\\\" --console >/dev/null && echo -e \\\"\\nDefault database tables created\\nSuper-users amp@localhost and root@localhost created with unix socket authentication\\nUse AMP's console to manage the server via the amp@localhost user\\n\\\"; }; }\"",
+        "UpdateSourceArgs": "-c \"cd mysql && { [[ -f \\\"{{$FullBaseDir}}data/mysql/mysql.ibd\\\" ]] || { mysql/bin/mysqld --initialize-insecure --port={{$ServerPort}} --basedir=\\\"{{$FullBaseDir}}mysql\\\" --datadir=\\\"{{$FullBaseDir}}data\\\" --user=amp >/dev/null && echo -e \\\"\\nDefault database tables created\\nSuper-users amp@localhost and root@localhost created with unix socket authentication\\nUse AMP's console to manage the server via the amp@localhost user\\n\\\"; }; }\"",
         "SkipOnFailure": false
     },
     {
