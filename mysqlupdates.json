@@ -1,0 +1,66 @@
+[
+    {
+        "UpdateStageName": "Create Installation Directory",
+        "UpdateSourcePlatform": "All",
+        "UpdateSource": "CreateDirectory",
+        "UpdateSourceArgs": "{{$FullBaseDir}}mysql"
+    },
+    {
+        "UpdateStageName": "Create Data Directory",
+        "UpdateSourcePlatform": "All",
+        "UpdateSource": "CreateDirectory",
+        "UpdateSourceArgs": "{{$FullBaseDir}}data"
+    },
+    {
+        "UpdateStageName": "Create Log Directory",
+        "UpdateSourcePlatform": "All",
+        "UpdateSource": "CreateDirectory",
+        "UpdateSourceArgs": "{{$FullBaseDir}}log/mysql"
+    },
+    {
+        "UpdateStageName": "Create Run Directory",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "CreateDirectory",
+        "UpdateSourceArgs": "{{$FullBaseDir}}run/mysqld"
+    },
+    {
+        "UpdateStageName": "Download MySQL",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"ServerVersion=\\\"{{ServerVersion}}\\\"; CustomServerVersion=\\\"{{CustomServerVersion}}\\\"; cd mysql && if command -v mysql/bin/mysqld >/dev/null 2>&1; then InstalledVersion=$(mysql/bin/mysqld -V | sed \\\"s/.*Ver \\([0-9][0-9]*\\.[0-9][0-9]*\\.[0-9][0-9]*\\).*/\\1/\\\"); else InstalledVersion=\\\"\\\"; fi; if [[ -z \\\"$ServerVersion\\\" ]]; then if [[ ! \\\"$CustomServerVersion\\\" =~ ^(8|9)\\.[0-9]+\\.[0-9]+$ ]]; then echo \\\"Invalid MySQL version format specified\\\" && exit 1; elif [ \\\"$InstalledVersion\\\" = \\\"$CustomServerVersion\\\" ]; then echo \\\"MySQL v$CustomServerVersion already installed. Skipping\\\" && exit 0; else CustomMinorVersion=\\\"${CustomServerVersion%.*}\\\"; DownloadURL=https://dev.mysql.com/get/Downloads/MySQL-$CustomMinorVersion/mysql-$CustomServerVersion-linux-glibc2.28-x86_64.tar.xz && OutputMessage=\\\"MySQL v$CustomServerVersion downloaded\\\"; fi; else LatestVersion=$(wget -qO- \\\"https://endoflife.date//api/v1/products/mysql/releases/$ServerVersion\\\" | jq -r \\\".result.latest.name\\\") && if [ \\\"$InstalledVersion\\\" = \\\"$LatestVersion\\\" ]; then echo \\\"MySQL v$LatestVersion already installed. Skipping\\\" && exit 0; else LatestMinorVersion=\\\"${LatestVersion%.*}\\\"; DownloadURL=https://dev.mysql.com/get/Downloads/MySQL-$LatestMinorVersion/mysql-$LatestVersion-linux-glibc2.28-x86_64.tar.xz && OutputMessage=\\\"MySQL v$LatestVersion downloaded\\\"; fi; fi; [[ -f mysql.tar.gz ]] && rm -rf mysql.tar.gz; wget -qO mysql.tar.gz $DownloadURL || { echo \\\"Download failed from the MySQL CDN. This is a fault with the CDN, not AMP. Aborting\\\"; exit 1; }; [[ -d mysql/lib/plugin ]] && mv mysql/lib/plugin plugin.bak; rm -rf mysql/* && mkdir -p mysql/lib && [[ -d plugin.bak ]] && mv plugin.bak mysql/lib/plugin; tar -xzf mysql.tar.gz -C mysql --strip-components=1 >/dev/null 2>&1 && rm -rf mysql.tar.gz >/dev/null 2>&1 && echo \\\"$OutputMessage\\\"\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Download MySQL",
+        "UpdateSourcePlatform": "Windows",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "powershell.exe",
+        "UpdateSourceArgs": "-NoProfile -Command \"$ProgressPreference='SilentlyContinue'; $ServerVersion='{{ServerVersion}}'; $CustomServerVersion='{{CustomServerVersion}}'; Set-Location -Path 'mysql'; if (Test-Path 'mysql/bin/mysqld.exe') { $match = & mysql/bin/mysqld.exe -V | Select-String -Pattern 'Ver ([0-9]+\\.[0-9]+\\.[0-9]+)'; $InstalledVersion = $match.Matches[0].Groups[1].Value } else { $InstalledVersion = '' }; if ( [string]::IsNullOrWhiteSpace($ServerVersion) ) { if ( $CustomServerVersion -notmatch '^(8|9)\\.[0-9]+\\.[0-9]+$' ) { Write-Output 'Invalid MySQL version format specified'; exit 1 } elseif ( $InstalledVersion -eq $CustomServerVersion ) { Write-Output \\\"MySQL v$CustomServerVersion already installed. Skipping\\\"; exit 0 } else { $splitVersion = $CustomServerVersion -split '\\.';$CustomMinorVersion = \\\"$($splitVersion[0]).$($splitVersion[1])\\\"; $DownloadURL=\\\"https://dev.mysql.com/get/Downloads/MySQL-$CustomMinorVersion/mysql-$CustomServerVersion-winx64.zip\\\"; $OutputMessage=\\\"MySQL v$CustomServerVersion downloaded\\\" } } else { $LatestVersion = ((Invoke-WebRequest -UseBasicParsing -Uri \\\"https://endoflife.date//api/v1/products/mysql/releases/$ServerVersion\\\").Content | ConvertFrom-Json).result.latest.name; if ( $InstalledVersion -eq $LatestVersion ) { Write-Output \\\"MySQL v$LatestVersion already installed. Skipping\\\"; exit 0 } else { $splitVersion = $LatestVersion -split '\\.'; $LatestMinorVersion = \\\"$($splitVersion[0]).$($splitVersion[1])\\\"; $DownloadURL=\\\"https://dev.mysql.com/get/Downloads/MySQL-$LatestMinorVersion/mysql-$LatestVersion-winx64.zip\\\"; $OutputMessage=\\\"MySQL v$LatestVersion downloaded\\\" } }; if ( Test-Path mysql.zip ) { Remove-Item mysql.zip -Force -ErrorAction SilentlyContinue *> $null }; try { Invoke-WebRequest -UseBasicParsing -Uri $DownloadURL -OutFile mysql.zip -ErrorAction Stop } catch { Write-Output \\\"Download failed from the MySQL CDN. This is a fault with the CDN, not AMP. Aborting\\\"; exit 1; }; if ( Test-Path 'mysql/lib/plugin' ) { Move-Item 'mysql/lib/plugin' 'plugin.bak' -Force *> $null }; Remove-Item mysql/* -Recurse -Force -ErrorAction SilentlyContinue *> $null; New-Item 'mysql/lib' -ItemType Directory -Force | Out-Null; Move-Item 'plugin.bak' 'mysql/lib/plugin' -Force *> $null; Expand-Archive -Path \\\"mysql.zip\\\" -DestinationPath \\\".\\\" -Force *> $null; Remove-Item mysql.zip -Force -ErrorAction SilentlyContinue *> $null; $source = Get-ChildItem -Directory -Filter 'mysql-*' | Select-Object -First 1; if ($source) { robocopy $source.FullName 'mysql' /E /MOVE /NFL /NDL /NJH /NJS /NP *> $null; if ($LASTEXITCODE -gt 7) { exit $LASTEXITCODE } }; Write-Output $OutputMessage\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Initialize MySQL",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"cd mysql && { [[ -f \\\"{{$FullBaseDir}}data/mysql/mysql.ibd\\\" ]] || { bin/mysqld --initialize --port={{$ServerPort}} --basedir=\\\"{{$FullBaseDir}}mysql\\\" --datadir=\\\"{{$FullBaseDir}}data\\\" --console >/dev/null; echo -e \\\"\\nDefault database tables created\\nSuper-users amp@localhost and root@localhost created with unix socket authentication\\nUse AMP's console to manage the server via the amp@localhost user\\n\\\"; }; }\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Initialize MySQL",
+        "UpdateSourcePlatform": "Windows",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "powershell.exe",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mysql'; if (Test-Path '{{$FullBaseDir}}data/mysql/mysql.ibd') { exit 0 } else { & bin/mysqld.exe --initialize --port={{$ServerPort}} --basedir=\\\"{{$FullBaseDir}}mysql\\\" --datadir=\\\"{{$FullBaseDir}}data\\\" --console 1> $null; Write-Output \\\"`nDefault database tables created`nSuper-users root@localhost, root@127.0.0.1 and (if applicable) root@::1 created with secure password authentication`nUse AMP's console to manage the server via the root@localhost user`n\\\" }\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Create my.cnf",
+        "UpdateSourcePlatform": "All",
+        "UpdateSource": "CreateFile",
+        "UpdateSourceData": "",
+        "UpdateSourceArgs": "{{$FullBaseDir}}my.cnf",
+        "OverwriteExistingFiles": false
+    }
+]

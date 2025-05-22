@@ -1,0 +1,36 @@
+[
+    {
+        "UpdateStageName": "Run MySQL Server",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"cd mysql && mysql/bin/mysqladmin --socket=\\\"{{$FullBaseDir}}run/mysqld/mysqld.sock\\\" ping >/dev/null 2>&1 && exit 0 || mysql/bin/mysqld --defaults-file=\\\"{{$FullBaseDir}}my.cnf\\\" --port={{$ServerPort}} --mysqlx-port={{$ServerXPort}} --admin-port={{$AdminPort}} --basedir=\\\"{{$FullBaseDir}}mysql\\\" --datadir=\\\"{{$FullBaseDir}}data\\\" --pid-file=\\\"{{$FullBaseDir}}run/mysqld/mysqld.pid\\\" --socket=\\\"{{$FullBaseDir}}run/mysqld/mysqld.sock\\\" --bind-address={{$ApplicationIPBinding}} --general-log-file=\\\"{{$FullBaseDir}}log/mysql/mysql.log\\\" --wait-timeout=28800 --upgrade=FORCE &\"",
+        "RunInBackground": true,
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Run MySQL Server",
+        "UpdateSourcePlatform": "Windows",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "powershell.exe",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mysql'; $env:MYSQL_PWD = \\\"{{RootPassword}}\\\"; & mysql/bin/mysqladmin.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { exit 0 } else { & mysql/bin/mysqld.exe --defaults-file=\\\"{{$FullBaseDir}}my.cnf\\\" --port={{$ServerPort}} --mysqlx-port={{$ServerXPort}} --admin-port={{$AdminPort}} --basedir=\\\"{{$FullBaseDir}}mysql\\\" --datadir=\\\"{{$FullBaseDir}}data\\\" --socket={{WindowsSocketName}} --bind-address=0.0.0.0 --general-log-file=\\\"{{$FullBaseDir}}log/mysql/mysql.log\\\" --wait-timeout=28800 --named-pipe --console --upgrade=FORCE }\"",
+        "RunInBackground": true,
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Set Up MySQL",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"cd mysql && timeout=60; while ((timeout--)); do mysql/bin/mysqladmin --socket=\\\"{{$FullBaseDir}}run/mysqld/mysqld.sock\\\" ping >/dev/null 2>&1 && break || sleep 1; done; ((timeout<0)) && { echo \\\"MySQL server failed to start. Aborting\\\"; exit 1; }; mysql/bin/mysql --socket=\\\"{{$FullBaseDir}}run/mysqld/mysqld.sock\\\" --user=amp -e \\\"FLUSH PRIVILEGES; ALTER USER 'root'@'localhost' IDENTIFIED VIA unix_socket; ALTER USER 'amp'@'localhost' IDENTIFIED VIA unix_socket; DELETE FROM mysql.user WHERE User=''; DROP DATABASE IF EXISTS test; DELETE FROM mysql.db WHERE Db='test' OR Db='test\\\\_%'; FLUSH PRIVILEGES\\\"\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Set Up MySQL",
+        "UpdateSourcePlatform": "Windows",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "powershell.exe",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mysql'; for ($i=0; $i -lt 60; $i++) { $env:MYSQL_PWD = \\\"{{RootPassword}}\\\"; & mysql/bin/mysqladmin.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { Remove-Item Env:MYSQL_PWD; & mysql/bin/mysqladmin.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root ping *> $null 2>&1; if ($LASTEXITCODE -eq 0) { $hosts = & mysql/bin/mysql.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root --batch --skip-column-names -e \\\"SELECT Host FROM mysql.user WHERE User = 'root';\\\"; foreach ($h in $hosts) { & mysql/bin/mysql.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root -e \\\"ALTER USER 'root'@'${h}' IDENTIFIED BY '{{RootPassword}}';\\\" }; break } }; Start-Sleep -Seconds 1 }; if ($i -eq 60) { Write-Output \\\"MySQL server failed to start. Aborting\\\"; exit 1 } else { Write-Output \\\"*** NOTE: The log messages above relating to access being denied for the root user can be ignored. ***\\\"; $env:MYSQL_PWD = \\\"{{RootPassword}}\\\"; & mysql/bin/mysql.exe --protocol=pipe --socket={{WindowsSocketName}} --user=root -e \\\"FLUSH PRIVILEGES; DELETE FROM mysql.user WHERE User=''; DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1'); DROP DATABASE IF EXISTS test; DELETE FROM mysql.db WHERE Db='test' OR Db='test\\\\_%'; FLUSH PRIVILEGES\\\" }\"",
+        "SkipOnFailure": false
+    }
+]
