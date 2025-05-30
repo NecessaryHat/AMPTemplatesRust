@@ -42,7 +42,7 @@
         "DisplayName": "Additional Client Command Line Options",
         "Category": "PostgreSQL:database",
         "Subcategory": "Server:dns:1",
-        "Description": "Specifies [additional command line options](https://www.postgresql.org/docs/17/app-psql.html) for the PostgreSQL client run by AMP (a super user called 'amp') that are not otherwise set by AMP. Use with care\"",
+        "Description": "Specifies [additional command line options](https://www.postgresql.org/docs/17/app-psql.html) for the PostgreSQL client run by AMP (a super user called 'amp') that are not otherwise set by AMP. Use with care",
         "Keywords": "custom,client,options,arguments",
         "FieldName": "CustomClientOptions",
         "InputType": "Textarea",
