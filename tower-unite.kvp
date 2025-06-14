@@ -18,6 +18,7 @@ Meta.Prerequsites=[]
 Meta.ExtraContainerPackages=[]
 Meta.ConfigReleaseState=NotSpecified
 Meta.NoCommercialUsage=False
+Meta.AppConfigId=c3417ee8-328b-4bc7-9a50-44c3cc12fb87
 App.DisplayName=Tower Unite
 App.RootDir=./tower-unite/
 App.BaseDirectory=./tower-unite/439660/

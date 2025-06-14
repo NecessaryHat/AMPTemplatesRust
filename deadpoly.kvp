@@ -24,6 +24,7 @@ Meta.NoCommercialUsage=False
 Meta.ConfigVersion=0.0.0.0
 Meta.ReleaseNotes=
 Meta.BreakingReleaseNotes=
+Meta.AppConfigId=a6dc3bb1-58a5-4489-a676-ede0e81761e8
 App.DisplayName=DeadPoly
 App.RootDir=./deadpoly/
 App.BaseDirectory=./deadpoly/2208380/
