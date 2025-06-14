@@ -2937,7 +2937,7 @@
         }
     },
     {
-        "DisplayName": "Ugc Service Type",
+        "DisplayName": "UGC Service Type",
         "Category": "Space Engineers:stadia_controller",
         "Subcategory": "Torch:mode_heat:9",
         "Description": "Changes the network type of the Torch server. If using crossplay, set to EOS. Otherwise, set to Steam.",
