@@ -56,21 +56,6 @@
         "Hidden": true
     },
     {
-        "DisplayName": "Torch Instance Path",
-        "Category": "Space Engineers:stadia_controller",
-        "Subcategory": "Torch:mode_heat:9",
-        "Description": "",
-        "Keywords": "",
-        "FieldName": "TorchConfig_InstancePath",
-        "Hidden": true,
-        "InputType": "text",
-        "IsFlagArgument": false,
-        "ParamFieldName": "/TorchConfig/InstancePath",
-        "IncludeInCommandLine": false,
-        "DefaultValue": "./servers",
-        "EnumValues": {}
-    },
-    {
         "DisplayName": "Torch No GUI",
         "Category": "Space Engineers:stadia_controller",
         "Subcategory": "Torch:mode_heat:9",
