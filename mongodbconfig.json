@@ -1,0 +1,80 @@
+[
+    {
+        "DisplayName": "Admin User Password",
+        "Category": "MongoDB:database",
+        "Subcategory": "Server:dns:1",
+        "Description": "",
+        "Keywords": "",
+        "FieldName": "AdminPassword",
+        "InputType": "text",
+        "Hidden": true,
+        "ParamFieldName": "AdminPassword",
+        "DefaultValue": "{{newguid()}}",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Server Configuration File Options",
+        "Category": "MongoDB:database",
+        "Subcategory": "Server:dns:1",
+        "Description": "Specifies [configuration file options](https://www.mongodb.com/docs/manual/reference/configuration-options/) to include in 'mongod.conf' for the MongoDB server that are not otherwise set by AMP. Must be in YAML format. Use with care",
+        "Keywords": "configuration,file,options",
+        "FieldName": "ConfigurationFileOptions",
+        "InputType": "Textarea",
+        "ParamFieldName": "ConfigurationFileOptions",
+        "DefaultValue": "",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Additional Server Command Line Options",
+        "Category": "MongoDB:database",
+        "Subcategory": "Server:dns:1",
+        "Description": "Specifies [additional command line options](https://www.mongodb.com/docs/mongodb-shell/reference/options/) for the MongoDB server that are not otherwise set by AMP. Use with care",
+        "Keywords": "custom,server,options,arguments",
+        "FieldName": "CustomServerOptions",
+        "InputType": "Textarea",
+        "ParamFieldName": "CustomServerOptions",
+        "DefaultValue": "",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Additional Client Command Line Options",
+        "Category": "MongoDB:database",
+        "Subcategory": "Server:dns:1",
+        "Description": "Specifies [additional command line options](https://www.mongodb.com/docs/mongodb-shell/reference/options/) for the MongoDB client run by AMP (a super user called 'admin') that are not otherwise set by AMP. Use with care",
+        "Keywords": "custom,client,options,arguments",
+        "FieldName": "CustomClientOptions",
+        "InputType": "Textarea",
+        "ParamFieldName": "CustomClientOptions",
+        "DefaultValue": "",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "MongoDB Release Version",
+        "Category": "Updates",
+        "Subcategory": "Server Updates:build:-1",
+        "Description": "Sets the MongoDB release version from which to install the latest point release. Select \"Custom\" to install the specific point release set under MongoDB Custom Point Release Version. WARNING: SWITCHING BETWEEN MAJOR RELEASE VERSIONS OR DOWNGRADING VERSIONS MAY CORRUPT DATA! Update the server after changing this setting",
+        "Keywords": "mongodb,release,version",
+        "FieldName": "ServerVersion",
+        "InputType": "enum",
+        "ParamFieldName": "ServerVersion",
+        "DefaultValue": "8.0",
+        "EnumValues": {
+            "8.0": "8.0 (default)",
+            "7.0": "7.0",
+            "": "--Custom--"
+        }
+    },
+    {
+        "DisplayName": "MongoDB Custom Point Release Version",
+        "Category": "Updates",
+        "Subcategory": "Server Updates:build:-1",
+        "Description": "Sets the [MongoDB point release version](https://www.mongodb.com/try/download/community-edition/releases/archive) to install, if \"Custom\" is selected under MongoDB Release Version. WARNING: SWITCHING BETWEEN MAJOR RELEASE VERSIONS OR DOWNGRADING VERSIONS MAY CORRUPT DATA! Update the server after changing this setting",
+        "Keywords": "mongodb,custom,point,release,version",
+        "FieldName": "CustomServerVersion",
+        "InputType": "text",
+        "ParamFieldName": "CustomServerVersion",
+        "DefaultValue": "",
+        "Placeholder": "8.0.9",
+        "EnumValues": {}
+    }
+]
