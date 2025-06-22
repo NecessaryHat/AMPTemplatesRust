@@ -42,11 +42,12 @@ if [ -d "$workshopDir" ]; then
       fi
     fi
 
-    modNameSanitized=$(echo "$modName" | tr '/' '-' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+    # Sanitise modName
+    modName=$(echo "$modName" | tr '/' '-' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
 
     if [ "$ModDirFormat" = "false" ]; then
       # Remove @name symlinks
-      rm -f "./@$modNameSanitized" >/dev/null 2>&1
+      rm -f "./@$modName" >/dev/null 2>&1
 
       # Create numbered symlinks
       ln -sf "$modDir" ./
@@ -55,7 +56,7 @@ if [ -d "$workshopDir" ]; then
       rm -f "./$(basename "$modDir")" >/dev/null 2>&1
 
       # Create @name symlink
-      ln -sfT "$modDir" "./@$modNameSanitized"
+      ln -sfT "$modDir" "./@$modName"
     fi
   done
 else
