@@ -84,7 +84,7 @@ App.RapidStartup=False
 App.SmartExcludeExemptions=["*.cfg","*.conf","*.config","*.ini","*.json","*.xml","*.properties","*.kvp","*.yml","*.yaml","*.toml","*.lua"]
 App.SmartExcludeSupported=False
 App.DumpFullChildProcessTree=False
-App.MonitorChildProcessName=
+App.MonitorChildProcessName=^mongosh mongodb://<credentials>@%2FAMP%2Fmongodb%2Frun%2Fmongodb-{{$ServerPort}}.sock/admin?.*directConnection=true&authSource=admin.*$
 App.MonitorDirectChildOnly=False
 App.SupportsUniversalSleep=False
 App.WakeupMode=Any
