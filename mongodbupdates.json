@@ -50,7 +50,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mongodb && mongodb/bin/mongod --dbpath {{$FullBaseDir}}data --bind_ip localhost,{{$FullBaseDir}}run/mongod.sock --unixSocketPrefix {{$FullBaseDir}}run --logpath {{$FullBaseDir}}log/mongodb/mongod.log --logappend --fork >/dev/null 2>&1 && mongosh/bin/mongosh \\\"mongodb://%2FAMP%2Fmongodb%2Frun%2Fmongod.sock\\\" --quiet --eval 'const db = db.getSiblingDB(\\\"admin\\\"); if (!db.getUser(\\\"admin\\\")) { db.createUser({ user: \\\"admin\\\", pwd: \\\"{{AdminPassword}}\\\", roles: [\\\"root\\\"] }); }'; mongodb/bin/mongod --shutdown --dbpath {{$FullBaseDir}}data\"",
+        "UpdateSourceArgs": "-c \"cd mongodb && mongodb/bin/mongod --dbpath {{$FullBaseDir}}data --bind_ip localhost,{{$FullBaseDir}}run/mongod.sock --unixSocketPrefix {{$FullBaseDir}}run --logpath {{$FullBaseDir}}log/mongodb/mongod.log --logappend --fork >/dev/null 2>&1 && mongosh/bin/mongosh \\\"mongodb://%2FAMP%2Fmongodb%2Frun%2Fmongod.sock\\\" --quiet --eval 'const db = db.getSiblingDB(\\\"admin\\\"); if (!db.getUser(\\\"admin\\\")) { db.createUser({ user: \\\"admin\\\", pwd: \\\"{{AdminPassword}}\\\", roles: [\\\"root\\\"] }); }'; mongodb/bin/mongod --shutdown --dbpath {{$FullBaseDir}}data >/dev/null 2>&1\"",
         "SkipOnFailure": false
     },
     {
