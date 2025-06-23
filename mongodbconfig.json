@@ -52,7 +52,7 @@
         "DisplayName": "MongoDB Release Version",
         "Category": "Updates",
         "Subcategory": "Server Updates:build:-1",
-        "Description": "Sets the MongoDB release version from which to install the latest point release. Select \"Custom\" to install the specific point release set under MongoDB Custom Point Release Version. WARNING: SWITCHING BETWEEN MAJOR RELEASE VERSIONS OR DOWNGRADING VERSIONS MAY CORRUPT DATA! Update the server after changing this setting",
+        "Description": "Sets the MongoDB release version from which to install the latest patch release. Select \"Custom\" to install the specific patch release set under MongoDB Custom Point Release Version. WARNING: SWITCHING BETWEEN MAJOR RELEASE VERSIONS OR DOWNGRADING VERSIONS MAY CORRUPT DATA! Update the server after changing this setting",
         "Keywords": "mongodb,release,version",
         "FieldName": "ServerVersion",
         "InputType": "enum",
@@ -65,11 +65,11 @@
         }
     },
     {
-        "DisplayName": "MongoDB Custom Point Release Version",
+        "DisplayName": "MongoDB Custom Patch Release Version",
         "Category": "Updates",
         "Subcategory": "Server Updates:build:-1",
-        "Description": "Sets the [MongoDB point release version](https://www.mongodb.com/try/download/community-edition/releases/archive) to install, if \"Custom\" is selected under MongoDB Release Version. WARNING: SWITCHING BETWEEN MAJOR RELEASE VERSIONS OR DOWNGRADING VERSIONS MAY CORRUPT DATA! Update the server after changing this setting",
-        "Keywords": "mongodb,custom,point,release,version",
+        "Description": "Sets the [MongoDB patch release version](https://www.mongodb.com/try/download/community-edition/releases/archive) to install, if \"Custom\" is selected under MongoDB Release Version. WARNING: SWITCHING BETWEEN MAJOR RELEASE VERSIONS OR DOWNGRADING VERSIONS MAY CORRUPT DATA! Update the server after changing this setting",
+        "Keywords": "mongodb,custom,patch,release,version",
         "FieldName": "CustomServerVersion",
         "InputType": "text",
         "ParamFieldName": "CustomServerVersion",
