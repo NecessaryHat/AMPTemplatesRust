@@ -4,7 +4,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mongodb && export PATH=\\\"{{$FullBaseDir}}mongodb/bin:{{$FullBaseDir}}mongosh/bin:$PATH\\\"; mongosh/bin/mongosh \\\"mongodb://%2FAMP%2Fmongodb%2Frun%2Fmongodb-{{$ServerPort}}.sock/admin\\\" --username admin --password {{AdminPassword}} --authenticationDatabase admin --quiet --eval \\\"db.runCommand({ ping: 1 })\\\" && exit 0 || { mongodb/bin/mongod {{CustomServerOptions}} --auth --config {{$FullBaseDir}}mongod.conf --dbpath {{$FullBaseDir}}data --port {{$ServerPort}} --bind_ip {{$ApplicationIPBinding}} --unixSocketPrefix {{$FullBaseDir}}run --logpath {{$FullBaseDir}}log/mongodb/mongod.log --logappend --logRotate rename --fork; }\"",
+        "UpdateSourceArgs": "-c \"cd mongodb && export PATH=\\\"{{$FullBaseDir}}mongodb/bin:$PATH\\\"; nc -z -v -w5 127.0.0.1 {{$ServerPort}} && exit 0 || { mongodb/bin/mongod {{CustomServerOptions}} --auth --config {{$FullBaseDir}}mongod.conf --dbpath {{$FullBaseDir}}data --port {{$ServerPort}} --bind_ip 0.0.0.0 --unixSocketPrefix {{$FullBaseDir}}run --logpath {{$FullBaseDir}}log/mongodb/mongod.log --logappend --logRotate rename --fork; }\"",
         "RunInBackground": true,
         "SkipOnFailure": false
     },
@@ -13,7 +13,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mongodb && export PATH=\\\"{{$FullBaseDir}}mongosh/bin:$PATH\\\"; timeout=60; while ((timeout--)); do mongosh/bin/mongosh \\\"mongodb://%2FAMP%2Fmongodb%2Frun%2Fmongodb-{{$ServerPort}}.sock/admin\\\" --username admin --password {{AdminPassword}} --authenticationDatabase admin --quiet --eval \\\"db.runCommand({ ping: 1 })\\\" && break || sleep 1; done; if ((timeout < 0)); then echo \\\"MongoDB server failed to start. Aborting\\\"; exit 1; fi\"",
+        "UpdateSourceArgs": "-c \"cd mongodb && timeout=60; while ((timeout--)); do nc -z -v 127.0.0.1 {{$ServerPort}} && break || sleep 1; done; if ((timeout < 0)); then echo \\\"MongoDB server failed to start. Aborting\\\"; exit 1; fi\"",
         "SkipOnFailure": false
     }
 ]

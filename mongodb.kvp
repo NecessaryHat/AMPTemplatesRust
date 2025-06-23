@@ -26,7 +26,7 @@ Meta.ReleaseNotes=
 Meta.BreakingReleaseNotes=
 Meta.AppConfigId=ac96d196-861c-4c32-9014-62d33e0d3934
 Meta.ImportableExtensions=[]
-Meta.AppIsMultiIPAware=True
+Meta.AppIsMultiIPAware=False
 App.DisplayName=MongoDB
 App.RootDir=./mongodb/
 App.BaseDirectory=./mongodb/
@@ -36,10 +36,10 @@ App.ExecutableLinux=mongosh/bin/mongosh
 App.WorkingDir=
 App.LinuxCommandLineArgs=
 App.WindowsCommandLineArgs=
-App.CommandLineArgs="mongodb://%2FAMP%2Fmongodb%2Frun%2Fmongodb-{{$ServerPort}}.sock/admin" {{CustomClientOptions}} {{$PlatformArgs}} --username admin --password {{AdminPassword}} --authenticationDatabase admin {{$FormattedArgs}}
+App.CommandLineArgs={{CustomClientOptions}} {{$PlatformArgs}} --host 127.0.0.1 --port {{$ServerPort}} --username admin --password {{AdminPassword}} --authenticationDatabase admin {{$FormattedArgs}}
 App.UseLinuxIOREDIR=False
 App.AppSettings={}
-App.EnvironmentVariables={"PATH":"%PATH%:{{$FullBaseDir}}mongosh/bin","GLIBC_TUNABLES":"glibc.pthread.rseq=0"}
+App.EnvironmentVariables={"PATH":"{{$FullBaseDir}}mongosh/bin:%PATH%","GLIBC_TUNABLES":"glibc.pthread.rseq=0"}
 App.CommandLineParameterFormat=--{0} {1}
 App.CommandLineParameterDelimiter= 
 App.ExitMethod=String
@@ -84,7 +84,7 @@ App.RapidStartup=False
 App.SmartExcludeExemptions=["*.cfg","*.conf","*.config","*.ini","*.json","*.xml","*.properties","*.kvp","*.yml","*.yaml","*.toml","*.lua"]
 App.SmartExcludeSupported=False
 App.DumpFullChildProcessTree=False
-App.MonitorChildProcessName=^mongosh mongodb:\/\/<credentials>@%2FAMP%2Fmongodb%2Frun%2Fmongodb-{{$ServerPort}}\.sock\/admin\?.*directConnection=true&authSource=admin.*$
+App.MonitorChildProcessName=
 App.MonitorDirectChildOnly=False
 App.SupportsUniversalSleep=False
 App.WakeupMode=Any
