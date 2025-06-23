@@ -39,7 +39,7 @@ App.WindowsCommandLineArgs=
 App.CommandLineArgs="mongodb://%2FAMP%2Fmongodb%2Frun%2Fmongodb-{{$ServerPort}}.sock/admin" {{CustomClientOptions}} {{$PlatformArgs}} --username admin --password {{AdminPassword}} --authenticationDatabase admin {{$FormattedArgs}}
 App.UseLinuxIOREDIR=False
 App.AppSettings={}
-App.EnvironmentVariables={"PATH":"%PATH%:{{$FullBaseDir}}mongosh/bin"}
+App.EnvironmentVariables={"PATH":"%PATH%:{{$FullBaseDir}}mongosh/bin","GLIBC_TUNABLES":"glibc.pthread.rseq=0"}
 App.CommandLineParameterFormat=--{0} {1}
 App.CommandLineParameterDelimiter= 
 App.ExitMethod=String
