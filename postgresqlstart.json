@@ -13,7 +13,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'postgresql'; $env:PGPASSWORD = \\\"{{AMPPassword}}\\\"; & pgsql/bin/pg_isready.exe --host=127.0.0.1 --port={{$ServerPort}} --username=amp --dbname=postgres *> $null 2>&1; if ($LASTEXITCODE -eq 0) { exit 0 } else { & pgsql/bin/postgres.exe -D \\\"{{$FullBaseDir}}data\\\" -p {{$ServerPort}} --listen_addresses=0.0.0.0 }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'postgresql'; $env:PGPASSWORD = \\\"{{AMPPassword}}\\\"; & pgsql/bin/pg_isready.exe --host=127.0.0.1 --port={{$ServerPort}} --username=amp --dbname=postgres *> $null 2>&1; if ($?) { exit 0 } else { & pgsql/bin/postgres.exe -D \\\"{{$FullBaseDir}}data\\\" -p {{$ServerPort}} --listen_addresses=0.0.0.0 }\"",
         "RunInBackground": true,
         "SkipOnFailure": false
     },
@@ -30,7 +30,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'postgresql'; for ($i=0; $i -lt 60; $i++) { $env:PGPASSWORD = \\\"{{AMPPassword}}\\\"; & pgsql/bin/pg_isready.exe --host=127.0.0.1 --port={{$ServerPort}} --username=amp --dbname=postgres *> $null 2>&1; if ($LASTEXITCODE -eq 0) { exit 0 }; Start-Sleep -Seconds 1 }; if ($i -eq 60) { Write-Output \\\"PostgreSQL server failed to start. Aborting\\\"; exit 1 }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'postgresql'; for ($i=0; $i -lt 60; $i++) { $env:PGPASSWORD = \\\"{{AMPPassword}}\\\"; & pgsql/bin/pg_isready.exe --host=127.0.0.1 --port={{$ServerPort}} --username=amp --dbname=postgres *> $null 2>&1; if ($?) { exit 0 }; Start-Sleep -Seconds 1 }; if ($i -eq 60) { Write-Output \\\"PostgreSQL server failed to start. Aborting\\\"; exit 1 }\"",
         "SkipOnFailure": false
     }
 ]
