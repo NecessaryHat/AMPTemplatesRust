@@ -1,6 +1,6 @@
 Meta.DisplayName=MongoDB
 Meta.Description=MongoDB Service Instance
-Meta.OS=Windows, Linux
+Meta.OS=Linux
 Meta.AarchSupport=NotSupported
 Meta.Arch=x86_64
 Meta.Author=Greelan
@@ -15,7 +15,7 @@ Meta.SpecificDockerImage=
 Meta.DockerRequired=False
 Meta.DockerBaseReadOnly=False
 Meta.ContainerPolicy=Required
-Meta.ContainerPolicyReason=
+Meta.ContainerPolicyReason=MongoDB builds are distro-specific on Linux. Requiring a container addresses this issue.
 Meta.ExtraSetupStepsURI=
 Meta.Prerequsites=[]
 Meta.ExtraContainerPackages=["libcurl4","libgssapi-krb5-2","libldap-common","libwrap0","libsasl2-2","libsasl2-modules","libsasl2-modules-gssapi-mit","openssl","liblzma5"]
