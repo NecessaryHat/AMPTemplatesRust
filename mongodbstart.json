@@ -4,7 +4,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd mongodb && export PATH=\\\"{{$FullBaseDir}}mongodb/bin:{{$FullBaseDir}}mongosh/bin:$PATH\\\"; mongosh/bin/mongosh --host localhost --port {{$ServerPort}} --username admin --password {{AdminPassword}} --authenticationDatabase admin --quiet --eval \\\"db.runCommand({ ping: 1 })\\\" && exit 0 || { mongodb/bin/mongod {{CustomServerOptions}} --auth --config {{$FullBaseDir}}mongod.conf --dbpath {{$FullBaseDir}}data --port {{$ServerPort}} --bind_ip localhost,{{$ApplicationIPBinding}} --unixSocketPrefix {{$FullBaseDir}}run --logpath {{$FullBaseDir}}log/mongodb/mongod.log --logappend --fork; }\"",
+        "UpdateSourceArgs": "-c \"cd mongodb && export PATH=\\\"{{$FullBaseDir}}mongodb/bin:{{$FullBaseDir}}mongosh/bin:$PATH\\\"; mongosh/bin/mongosh --host localhost --port {{$ServerPort}} --username admin --password {{AdminPassword}} --authenticationDatabase admin --quiet --eval \\\"db.runCommand({ ping: 1 })\\\" && exit 0 || { mongodb/bin/mongod {{CustomServerOptions}} --auth --config {{$FullBaseDir}}mongod.conf --dbpath {{$FullBaseDir}}data --port {{$ServerPort}} --bind_ip 0.0.0.0 --unixSocketPrefix {{$FullBaseDir}}run --logpath {{$FullBaseDir}}log/mongodb/mongod.log --logappend --fork; }\"",
         "RunInBackground": true,
         "SkipOnFailure": false
     },
