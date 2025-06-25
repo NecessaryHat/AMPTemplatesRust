@@ -81,7 +81,7 @@
         "Category": "Updates",
         "Subcategory": "Server Updates:build:-1",
         "Description": "Sets the MySQL release stream from which to install the latest version, unless a specific version is specified under MySQL Version. WARNING: SWITCHING BETWEEN RELEASE STREAMS OR DOWNGRADING VERSIONS MAY CORRUPT DATA! Update the server after changing this setting",
-        "Keywords": "mysql,release,streadm,MySQLRelease",
+        "Keywords": "mysql,release,stream,MySQLRelease",
         "FieldName": "ServerVersion",
         "InputType": "enum",
         "ParamFieldName": "MySQLRelease",
