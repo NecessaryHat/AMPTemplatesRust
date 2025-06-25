@@ -74,11 +74,11 @@
         "ParamFieldName": "MariaDBRelease",
         "DefaultValue": "11.4",
         "EnumValues": {
-            "12.0": "12.0 - RC",
-            "11.8": "11.8 - Stable",
-            "11.4": "11.4 - Stable (default)",
-            "10.11": "10.11 - Stable",
-            "10.6": "10.6 - Stable"
+            "12.0": "12.0",
+            "11.8": "11.8",
+            "11.4": "11.4 (default)",
+            "10.11": "10.11",
+            "10.6": "10.6"
         }
     },
     {
