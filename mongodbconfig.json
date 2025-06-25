@@ -49,31 +49,30 @@
         "EnumValues": {}
     },
     {
-        "DisplayName": "MongoDB Release Version",
+        "DisplayName": "MongoDB Release Stream",
         "Category": "Updates",
         "Subcategory": "Server Updates:build:-1",
-        "Description": "Sets the MongoDB release version from which to install the latest patch release. Check [system compatibility](https://www.mongodb.com/docs/manual/administration/production-notes/#platform-support-matrix). Select \"Custom\" to install the specific patch release set under MongoDB Custom Point Release Version. WARNING: SWITCHING BETWEEN MAJOR RELEASE VERSIONS OR DOWNGRADING VERSIONS MAY CORRUPT DATA! Update the server after changing this setting",
-        "Keywords": "mongodb,release,version",
-        "FieldName": "ServerVersion",
+        "Description": "Sets the MongoDB release stream from which to install the latest version, unless a specific version is specified under MongoDB Version. Check [system compatibility](https://www.mongodb.com/docs/manual/administration/production-notes/#platform-support-matrix). WARNING: SWITCHING BETWEEN RELEASE STREAMS OR DOWNGRADING VERSIONS MAY CORRUPT DATA! Update the server after changing this setting",
+        "Keywords": "mongodb,release,stream,ServerRelease",
+        "FieldName": "ServerRelease",
         "InputType": "enum",
-        "ParamFieldName": "ServerVersion",
+        "ParamFieldName": "ServerRelease",
         "DefaultValue": "8.0",
         "EnumValues": {
             "8.0": "8.0 (default)",
             "7.0": "7.0",
-            "6.0": "6.0 (Windows only)",
-            "": "--Custom--"
+            "6.0": "6.0 (Windows only)"
         }
     },
     {
-        "DisplayName": "MongoDB Custom Patch Release Version",
+        "DisplayName": "MongoDB Version",
         "Category": "Updates",
         "Subcategory": "Server Updates:build:-1",
-        "Description": "Sets the [MongoDB patch release version](https://www.mongodb.com/try/download/community-edition/releases/archive) to install, if \"Custom\" is selected under MongoDB Release Version. Check [system compatibility](https://www.mongodb.com/docs/manual/administration/production-notes/#platform-support-matrix). WARNING: SWITCHING BETWEEN MAJOR RELEASE VERSIONS OR DOWNGRADING VERSIONS MAY CORRUPT DATA! Update the server after changing this setting",
-        "Keywords": "mongodb,custom,patch,release,version",
-        "FieldName": "CustomServerVersion",
+        "Description": "Sets the [MongoDB version](https://www.mongodb.com/try/download/community-edition/releases/archive) to install. Empty = latest version for the release stream specified under MongoDB Release Stream. Check [system compatibility](https://www.mongodb.com/docs/manual/administration/production-notes/#platform-support-matrix). WARNING: SWITCHING BETWEEN RELEASE STREAMS OR DOWNGRADING VERSIONS MAY CORRUPT DATA! Update the server after changing this setting",
+        "Keywords": "mongodb,version,ServerVersion",
+        "FieldName": "ServerVersion",
         "InputType": "text",
-        "ParamFieldName": "CustomServerVersion",
+        "ParamFieldName": "ServerVersion",
         "DefaultValue": "",
         "Placeholder": "8.0.9",
         "EnumValues": {}
