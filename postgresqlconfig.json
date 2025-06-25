@@ -51,33 +51,32 @@
         "EnumValues": {}
     },
     {
-        "DisplayName": "PostgreSQL Release Version",
+        "DisplayName": "PostgreSQL Release Stream",
         "Category": "Updates",
         "Subcategory": "Server Updates:build:-1",
-        "Description": "Sets the PostgreSQL release version from which to install the latest point release. Select \"Custom\" to install the specific point release set under PostgreSQL Custom Point Release Version. WARNING: SWITCHING BETWEEN MAJOR RELEASE VERSIONS MAY CORRUPT DATA! Update the server after changing this setting",
-        "Keywords": "postgresql,release,version",
-        "FieldName": "ServerVersion",
+        "Description": "Sets the PostgreSQL release stream from which to install the latest version, unless a specific version is specified under PostgreSQL Version. WARNING: SWITCHING BETWEEN RELEASE STREAMS MAY CORRUPT DATA! Update the server after changing this setting",
+        "Keywords": "postgresql,release,stream,PostgreSQLRelease",
+        "FieldName": "PostgreSQLRelease",
         "InputType": "enum",
-        "ParamFieldName": "ServerVersion",
+        "ParamFieldName": "PostgreSQLRelease",
         "DefaultValue": "16",
         "EnumValues": {
             "17": "17",
             "16": "16 (default)",
             "15": "15",
             "14": "14",
-            "13": "13",
-            "": "--Custom--"
+            "13": "13"
         }
     },
     {
-        "DisplayName": "PostgreSQL Custom Point Release Version",
+        "DisplayName": "PostgreSQL Version",
         "Category": "Updates",
         "Subcategory": "Server Updates:build:-1",
-        "Description": "Sets the [PostgreSQL point release version](https://www.postgresql.org/ftp/source/) to install, if \"Custom\" is selected under PostgreSQL Release Version. WARNING: SWITCHING BETWEEN MAJOR RELEASE VERSIONS MAY CORRUPT DATA! Update the server after changing this setting",
-        "Keywords": "postgresql,custom,point,release,version",
-        "FieldName": "CustomServerVersion",
+        "Description": "Sets the [PostgreSQL version](https://www.postgresql.org/ftp/source/) to install. Empty = latest version for the release stream specified under PostgreSQL Release Stream. WARNING: SWITCHING BETWEEN RELEASE STREAMS MAY CORRUPT DATA! Update the server after changing this setting",
+        "Keywords": "postgresql,version,PostgreSQLVersion",
+        "FieldName": "PostgreSQLVersion",
         "InputType": "text",
-        "ParamFieldName": "CustomServerVersion",
+        "ParamFieldName": "PostgreSQLVersion",
         "DefaultValue": "",
         "Placeholder": "16.4",
         "EnumValues": {}
