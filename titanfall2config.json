@@ -145,7 +145,7 @@
         "Description": "If enabled, players will be able to join the server without authenticating with the masterserver. Currently required for direct IP connections, rather than through the server browser",
         "Keywords": "allow,insecure,auth,connections,ns_auth_allow_insecure",
         "FieldName": "ns_auth_allow_insecure",
-        "InputType": "text",
+        "InputType": "checkbox",
         "ParamFieldName": "ns_auth_allow_insecure",
         "DefaultValue": "0",
         "EnumValues": {
