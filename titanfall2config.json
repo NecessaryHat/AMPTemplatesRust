@@ -228,7 +228,7 @@
         }
     },
     {
-        "DisplayName": "Chan Limit (ms/sec)",
+        "DisplayName": "Chan Limit",
         "Category": "Titanfall 2:stadia_controller",
         "Subcategory": "Server:dns:1",
         "Description": "Sets the amount of server netchan processing time clients can use before getting kicked",
