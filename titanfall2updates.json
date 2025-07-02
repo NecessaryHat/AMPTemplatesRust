@@ -10,11 +10,13 @@
     },
     {
         "UpdateStageName": "Northstar Download",
-        "UpdateSourcePlatform": "Windows",
+        "UpdateSourcePlatform": "All",
         "UpdateSource": "GithubRelease",
         "UpdateSourceData": "R2Northstar/Northstar",
         "UpdateSourceTarget": "{{$FullBaseDir}}",
+        "UnzipUpdateSource": true,
         "OverwriteExistingFiles": true,
+        "DeleteAfterExtract": true,
         "SkipOnFailure": false
     },
     {
@@ -22,8 +24,11 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "GithubRelease",
         "UpdateSourceData": "R2Northstar/NorthstarStubs",
+        "UpdateSourceArgs": "NorthstarStubs.zip",
         "UpdateSourceTarget": "{{$FullBaseDir}}bin/x64_retail",
+        "UnzipUpdateSource": true,
         "OverwriteExistingFiles": true,
+        "DeleteAfterExtract": true,
         "SkipOnFailure": false
     },
     {
@@ -31,8 +36,11 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "GithubRelease",
         "UpdateSourceData": "R2Northstar/NorthstarStubs",
+        "UpdateSourceArgs": "NorthstarStubs.zip",
         "UpdateSourceTarget": "{{$FullBaseDir}}",
+        "UnzipUpdateSource": true,
         "OverwriteExistingFiles": true,
+        "DeleteAfterExtract": true,
         "SkipOnFailure": false
     },
     {
