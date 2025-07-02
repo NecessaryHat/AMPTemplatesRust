@@ -11,8 +11,9 @@
     {
         "UpdateStageName": "Northstar Download",
         "UpdateSourcePlatform": "All",
-        "UpdateSource": "GithubRelease",
-        "UpdateSourceData": "R2Northstar/Northstar",
+        "UpdateSource": "FetchURLFromJQ",
+        "UpdateSourceData": "https://api.github.com/repos/R2Northstar/Northstar/releases/latest",
+        "UpdateSourceArgs": ".assets[0].browser_download_url",
         "UpdateSourceTarget": "{{$FullBaseDir}}",
         "UnzipUpdateSource": true,
         "OverwriteExistingFiles": true,
