@@ -11,9 +11,14 @@
     {
         "UpdateStageName": "Northstar Download",
         "UpdateSourcePlatform": "All",
+<<<<<<< Updated upstream
         "UpdateSource": "FetchURLFromJQ",
         "UpdateSourceData": "https://api.github.com/repos/R2Northstar/Northstar/releases/latest",
         "UpdateSourceArgs": "$.assets[0].browser_download_url",
+=======
+        "UpdateSource": "GithubRelease",
+        "UpdateSourceArgs": "R2Northstar/Northstar",
+>>>>>>> Stashed changes
         "UpdateSourceTarget": "{{$FullBaseDir}}",
         "UnzipUpdateSource": true,
         "OverwriteExistingFiles": true,
