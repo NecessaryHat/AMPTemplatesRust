@@ -74,7 +74,6 @@
         "Keywords": "game,mode,gamemode",
         "FieldName": "mp_gamemode",
         "InputType": "enum",
-        "IsFlagArgument": false,
         "ParamFieldName": "mp_gamemode",
         "IncludeInCommandLine": true,
         "SkipIfEmpty": true,
@@ -95,10 +94,10 @@
         }
     },
     {
-        "DisplayName": "Map",
+        "DisplayName": "Initial Map",
         "Category": "Titanfall 2:stadia_controller",
         "Subcategory": "Server:dns:1",
-        "Description": "Sets the map for the server. To use a map not listed in the dropdown, select \"Custom\" and set the Custom Map Name",
+        "Description": "Sets the initial map for the server. To use a map not listed in the dropdown, select \"Custom\" and set the Custom Map Name",
         "Keywords": "map",
         "FieldName": "map",
         "InputType": "enum",
@@ -111,16 +110,14 @@
         }
     },
     {
-        "DisplayName": "Custom Map Name",
+        "DisplayName": "Custom Initial Map Name",
         "Category": "Titanfall 2:stadia_controller",
         "Subcategory": "Server:dns:1",
-        "Description": "Sets a custom map for the server, if \"Custom\" is selected under Map",
+        "Description": "Sets a custom map for the server, if \"Custom\" is selected under Initial Map",
         "Keywords": "custom,map",
         "FieldName": "CustomMap",
         "InputType": "text",
-        "IsFlagArgument": false,
         "ParamFieldName": "CustomMap",
-        "IncludeInCommandLine": false,
         "DefaultValue": "",
         "Placeholder": "",
         "EnumValues": {}
@@ -134,7 +131,6 @@
         "FieldName": "$MaxUsers",
         "InputType": "number",
         "MinValue": "1",
-        "IsFlagArgument": false,
         "ParamFieldName": "max_players",
         "IncludeInCommandLine": true,
         "DefaultValue": "24",
@@ -150,9 +146,7 @@
         "Keywords": "allow,insecure,auth,connections,ns_auth_allow_insecure",
         "FieldName": "ns_auth_allow_insecure",
         "InputType": "text",
-        "IsFlagArgument": false,
         "ParamFieldName": "ns_auth_allow_insecure",
-        "IncludeInCommandLine": false,
         "DefaultValue": "0",
         "EnumValues": {
             "False": "0",
@@ -167,9 +161,7 @@
         "Keywords": "erase,authentication,information,ns_erase_auth_info",
         "FieldName": "ns_erase_auth_info",
         "InputType": "checkbox",
-        "IsFlagArgument": false,
         "ParamFieldName": "ns_erase_auth_info",
-        "IncludeInCommandLine": false,
         "DefaultValue": "1",
         "EnumValues": {
             "False": "0",
@@ -212,9 +204,7 @@
         "Keywords": "return,lobby,ns_should_return_to_lobby",
         "FieldName": "ns_should_return_to_lobby",
         "InputType": "checkbox",
-        "IsFlagArgument": false,
         "ParamFieldName": "ns_should_return_to_lobby",
-        "IncludeInCommandLine": false,
         "DefaultValue": "1",
         "EnumValues": {
             "False": "0",
@@ -273,9 +263,7 @@
         "Keywords": "base,tick,interval,base_tickinterval_mp",
         "FieldName": "base_tickinterval_mp",
         "InputType": "number",
-        "IsFlagArgument": false,
         "ParamFieldName": "base_tickinterval_mp",
-        "IncludeInCommandLine": false,
         "DefaultValue": "0.016666667",
         "Placeholder": "0.016666667",
         "EnumValues": {}
