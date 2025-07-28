@@ -1,6 +1,6 @@
 Meta.DisplayName=PostgreSQL
 Meta.Description=PostgreSQL Service Instance
-Meta.OS=Linux
+Meta.OS=Windows, Linux
 Meta.AarchSupport=Native
 Meta.Arch=All
 Meta.Author=Greelan
@@ -10,7 +10,7 @@ Meta.EndpointURIFormat=
 Meta.ConfigManifest=postgresqlconfig.json
 Meta.MetaConfigManifest=postgresqlmetaconfig.json
 Meta.ConfigRoot=postgresql.kvp
-Meta.MinAMPVersion=2.6.1.6
+Meta.MinAMPVersion=2.6.2.4
 Meta.SpecificDockerImage=
 Meta.DockerRequired=False
 Meta.DockerBaseReadOnly=False
