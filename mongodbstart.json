@@ -13,7 +13,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mongodb'; $env:PATH = \\\"{{$FullBaseDir}}mongodb\\bin;{{$FullBaseDir}}mongosh\\bin;\\\" + $env:PATH; & mongosh/bin/mongosh.exe --host 127.0.0.1 --port {{$ServerPort}} --quiet --eval 'db.runCommand({ ping: 1 })' *> $null; if ($?) { exit 0 } else { & mongodb/bin/mongod.exe {{CustomServerOptions}} --auth --config {{$FullBaseDir}}mongod.conf --dbpath \\\"{{$FullBaseDir}}data\\\" --port {{$ServerPort}} --bind_ip 0.0.0.0 --logpath \\\"{{$FullBaseDir}}log\\mongodb\\mongod.log\\\" --logappend --logRotate rename }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mongodb'; $env:PATH = \\\"{{$FullBaseDir}}mongodb\\bin;{{$FullBaseDir}}mongosh\\bin;\\\" + $env:PATH; & mongosh/bin/mongosh.exe --host 127.0.0.1 --port {{$ServerPort}} --quiet --eval 'db.runCommand({ ping: 1 })' *> $null; if ($LASTEXITCODE -eq 0) { exit 0 } else { & mongodb/bin/mongod.exe {{CustomServerOptions}} --auth --config {{$FullBaseDir}}mongod.conf --dbpath \\\"{{$FullBaseDir}}data\\\" --port {{$ServerPort}} --bind_ip 0.0.0.0 --logpath \\\"{{$FullBaseDir}}log\\mongodb\\mongod.log\\\" --logappend --logRotate rename }\"",
         "RunInBackground": true,
         "SkipOnFailure": false
     },
@@ -30,7 +30,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mongodb'; $env:PATH = \\\"{{$FullBaseDir}}mongosh\\bin;\\\" + $env:PATH; for ($i = 0; $i -lt 60; $i++) { & mongosh/bin/mongosh.exe --host 127.0.0.1 --port {{$ServerPort}} --quiet --eval 'db.runCommand({ ping: 1 })' *> $null; if ($?) { break }; Start-Sleep -Seconds 1 }; if ($i -eq 60) { Write-Output 'MongoDB server failed to start. Aborting'; exit 1 }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -Path 'mongodb'; $env:PATH = \\\"{{$FullBaseDir}}mongosh\\bin;\\\" + $env:PATH; for ($i = 0; $i -lt 60; $i++) { & mongosh/bin/mongosh.exe --host 127.0.0.1 --port {{$ServerPort}} --quiet --eval 'db.runCommand({ ping: 1 })' *> $null; if ($LASTEXITCODE -eq 0) { break }; Start-Sleep -Seconds 1 }; if ($i -eq 60) { Write-Output 'MongoDB server failed to start. Aborting'; exit 1 }\"",
         "SkipOnFailure": false
     }
 ]
