@@ -111,9 +111,8 @@
     {
         "UpdateStageName": "Carbon Download",
         "UpdateSourcePlatform": "Windows",
-        "UpdateSource": "GithubRelease",
-        "UpdateSourceArgs": "CarbonCommunity/Carbon",
-        "UpdateSourceData": "Carbon.Windows.Release.zip",
+        "UpdateSource": "FetchURL",
+        "UpdateSourceData": "https://github.com/CarbonCommunity/Carbon/releases/download/production_build/Carbon.Windows.Release.zip",
         "UpdateSourceTarget": "{{$FullBaseDir}}",
         "UnzipUpdateSource": true,
         "OverwriteExistingFiles": true,
@@ -124,9 +123,8 @@
     {
         "UpdateStageName": "Carbon Download",
         "UpdateSourcePlatform": "Linux",
-        "UpdateSource": "GithubRelease",
-        "UpdateSourceArgs": "CarbonCommunity/Carbon",
-        "UpdateSourceData": "Carbon.Linux.Release.tar.gz",
+        "UpdateSource": "FetchURL",
+        "UpdateSourceData": "https://github.com/CarbonCommunity/Carbon/releases/download/production_build/Carbon.Linux.Release.tar.gz",
         "UpdateSourceTarget": "{{$FullBaseDir}}",
         "UnzipUpdateSource": true,
         "OverwriteExistingFiles": true,
@@ -158,6 +156,102 @@
         "OverwriteExistingFiles": true,
         "UpdateSourceConditionSetting": "ModLoader",
         "UpdateSourceConditionValue": "umod",
+        "DeleteAfterExtract": true
+    }
+    {
+        "UpdateStageName": "Carbon Edge/Develop Download",
+        "UpdateSourcePlatform": "Windows",
+        "UpdateSource": "FetchURL",
+        "UpdateSourceData": "https://github.com/CarbonCommunity/Carbon/releases/download/edge_build/Carbon.Windows.Debug.zip",
+        "UpdateSourceTarget": "{{$FullBaseDir}}",
+        "UnzipUpdateSource": true,
+        "OverwriteExistingFiles": true,
+        "UpdateSourceConditionSetting": "ModLoader",
+        "UpdateSourceConditionValue": "carbon_edge",
+        "DeleteAfterExtract": true
+    },
+    {
+        "UpdateStageName": "Carbon Edge/Develop Download",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "FetchURL",
+        "UpdateSourceData": "https://github.com/CarbonCommunity/Carbon/releases/download/edge_build/Carbon.Linux.Debug.tar.gz",
+        "UpdateSourceTarget": "{{$FullBaseDir}}",
+        "UnzipUpdateSource": true,
+        "OverwriteExistingFiles": true,
+        "UpdateSourceConditionSetting": "ModLoader",
+        "UpdateSourceConditionValue": "carbon_edge",
+        "DeleteAfterExtract": true
+    },
+    {
+        "UpdateStageName": "Carbon Staging Download",
+        "UpdateSourcePlatform": "Windows",
+        "UpdateSource": "FetchURL",
+        "UpdateSourceData": "https://github.com/CarbonCommunity/Carbon/releases/download/rustbeta_staging_build/Carbon.Windows.Debug.zip",
+        "UpdateSourceTarget": "{{$FullBaseDir}}",
+        "UnzipUpdateSource": true,
+        "OverwriteExistingFiles": true,
+        "UpdateSourceConditionSetting": "ModLoader",
+        "UpdateSourceConditionValue": "carbon_staging",
+        "DeleteAfterExtract": true
+    },
+    {
+        "UpdateStageName": "Carbon Staging Download",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "FetchURL",
+        "UpdateSourceData": "https://github.com/CarbonCommunity/Carbon/releases/download/rustbeta_staging_build/Carbon.Linux.Debug.tar.gz",
+        "UpdateSourceTarget": "{{$FullBaseDir}}",
+        "UnzipUpdateSource": true,
+        "OverwriteExistingFiles": true,
+        "UpdateSourceConditionSetting": "ModLoader",
+        "UpdateSourceConditionValue": "carbon_staging",
+        "DeleteAfterExtract": true
+    },
+    {
+        "UpdateStageName": "Carbon Aux01 Download",
+        "UpdateSourcePlatform": "Windows",
+        "UpdateSource": "FetchURL",
+        "UpdateSourceData": "https://github.com/CarbonCommunity/Carbon/releases/download/rustbeta_aux01_build/Carbon.Windows.Debug.zip",
+        "UpdateSourceTarget": "{{$FullBaseDir}}",
+        "UnzipUpdateSource": true,
+        "OverwriteExistingFiles": true,
+        "UpdateSourceConditionSetting": "ModLoader",
+        "UpdateSourceConditionValue": "carbon_aux01",
+        "DeleteAfterExtract": true
+    },
+    {
+        "UpdateStageName": "Carbon Aux01 Download",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "FetchURL",
+        "UpdateSourceData": "https://github.com/CarbonCommunity/Carbon/releases/download/rustbeta_aux01_build/Carbon.Linux.Debug.tar.gz",
+        "UpdateSourceTarget": "{{$FullBaseDir}}",
+        "UnzipUpdateSource": true,
+        "OverwriteExistingFiles": true,
+        "UpdateSourceConditionSetting": "ModLoader",
+        "UpdateSourceConditionValue": "carbon_aux01",
+        "DeleteAfterExtract": true
+    },
+    {
+        "UpdateStageName": "Carbon Aux02 Download",
+        "UpdateSourcePlatform": "Windows",
+        "UpdateSource": "FetchURL",
+        "UpdateSourceData": "https://github.com/CarbonCommunity/Carbon/releases/download/rustbeta_aux02_build/Carbon.Windows.Debug.zip",
+        "UpdateSourceTarget": "{{$FullBaseDir}}",
+        "UnzipUpdateSource": true,
+        "OverwriteExistingFiles": true,
+        "UpdateSourceConditionSetting": "ModLoader",
+        "UpdateSourceConditionValue": "carbon_aux02",
+        "DeleteAfterExtract": true
+    },
+    {
+        "UpdateStageName": "Carbon Aux02 Download",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "FetchURL",
+        "UpdateSourceData": "https://github.com/CarbonCommunity/Carbon/releases/download/rustbeta_aux02_build/Carbon.Linux.Debug.tar.gz",
+        "UpdateSourceTarget": "{{$FullBaseDir}}",
+        "UnzipUpdateSource": true,
+        "OverwriteExistingFiles": true,
+        "UpdateSourceConditionSetting": "ModLoader",
+        "UpdateSourceConditionValue": "carbon_aux02",
         "DeleteAfterExtract": true
     }
 ]
